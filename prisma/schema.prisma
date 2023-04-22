@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Creative_Activity {
+  activityId   Int     @id @default(autoincrement())
+  name         String  @db.VarChar(30)
+  activityType String  @db.VarChar(10)
+  date         String  @db.VarChar(30)
+  semester     String  @db.VarChar(10)
+  role         String  @db.VarChar(200)
+  thoughts     String? @db.VarChar(200)
+  writerId     Int
+  User         User    @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
+}
+
+model User {
+  userId            Int                 @id @default(autoincrement())
+  loginId           String              @db.VarChar(20)
+  password          String              @db.VarChar(20)
+  name              String              @db.VarChar(20)
+  school            String              @db.VarChar(30)
+  grade             Int
+  isTeen            Boolean
+  Creative_Activity Creative_Activity[]
+}
