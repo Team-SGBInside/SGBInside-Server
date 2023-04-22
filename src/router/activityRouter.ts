@@ -1,8 +1,6 @@
 import { Router } from "express";
-import activityRouter from "./activityRouter";
-
 const router: Router = Router();
 
-router.use("/activity", activityRouter);
+router.post("/activity/:activityId", activityController.createActivity);
 
 export default router;
