@@ -3,6 +3,7 @@ const prisma = new PrismaClient();
 
 // 창의적 체험활동 기록
 const createCreativeActivity = async (
+  userId: number,
   name: string,
   activityType: string,
   date: string,
@@ -18,6 +19,7 @@ const createCreativeActivity = async (
       semester,
       role,
       thoughts,
+      writerId: userId,
     },
   });
 };
