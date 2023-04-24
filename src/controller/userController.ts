@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { UserService } from "../service";
+import { userService } from "../service";
 
 // 유저 생성
 const createUser = async (req: Request, res: Response) => {
   const { loginId, password, name, school, grade, isTeen } = req.body;
 
-  const data = await UserService.createUser(
+  const data = await userService.createUser(
     loginId,
     password,
     name,
