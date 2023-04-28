@@ -4,6 +4,7 @@ import { userService } from "../service";
 import { validationResult } from "express-validator";
 import { rm, sc } from "../constants";
 import { fail, success } from "../constants/response";
+import jwtHandler from "../modules/jwtHandler";
 
 // 유저 생성
 const createUser = async (req: Request, res: Response) => {
@@ -23,6 +24,16 @@ const createUser = async (req: Request, res: Response) => {
       .status(sc.BAD_REQUEST)
       .send(fail(sc.BAD_REQUEST, rm.SIGNUP_FAIL));
   }
+
+  // jwtHandler 내 sign 함수를 이용해 accessToken 생성
+  const accessToken = jwtHandler.sign(data.userId);
+
+  const result = {
+    id: data.userId,
+    name: data.name,
+    accessToken,
+  };
+
   return res
     .status(sc.CREATED)
     .send(success(sc.CREATED, rm.SIGNIN_SUCCESS, data));
