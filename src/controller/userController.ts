@@ -1,27 +1,31 @@
+import { UserCreateDTO } from "./../interfaces/UserCreateDTO";
 import { Request, Response } from "express";
 import { userService } from "../service";
+import { validationResult } from "express-validator";
+import { rm, sc } from "../constants";
+import { fail, success } from "../constants/response";
 
 // 유저 생성
 const createUser = async (req: Request, res: Response) => {
-  const { loginId, password, name, school, grade, isTeen } = req.body;
+  // validation의 결과를 바탕으로 분기 처리
+  const error = validationResult(req);
+  if (!error.isEmpty()) {
+    return res
+      .status(sc.BAD_REQUEST)
+      .send(fail(sc.BAD_REQUEST, rm.BAD_REQUEST));
+  }
 
-  const data = await userService.createUser(
-    loginId,
-    password,
-    name,
-    school,
-    grade,
-    isTeen
-  );
+  const userCreateDTO: UserCreateDTO = req.body;
+  const data = await userService.createUser(userCreateDTO);
 
   if (!data) {
     return res
-      .status(400)
-      .json({ status: 400, message: "회원가입에 실패했습니다." });
+      .status(sc.BAD_REQUEST)
+      .send(fail(sc.BAD_REQUEST, rm.SIGNUP_FAIL));
   }
   return res
-    .status(200)
-    .json({ status: 200, message: "회원가입에 성공했습니다.", data });
+    .status(sc.CREATED)
+    .send(success(sc.CREATED, rm.SIGNIN_SUCCESS, data));
 };
 
 const userController = {
