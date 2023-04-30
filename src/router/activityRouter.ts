@@ -5,7 +5,18 @@ import { body } from "express-validator";
 
 const router: Router = Router();
 
-router.post("/creative", activityController.createCreativeActivity);
+router.post(
+  "/creative",
+  [
+    body("name").trim().notEmpty(),
+    body("activityType").trim().notEmpty(),
+    body("startDate").trim().notEmpty(),
+    body("endDate").trim().notEmpty(),
+    body("semester").trim().notEmpty(),
+    body("role").trim().notEmpty(),
+  ],
+  activityController.createCreativeActivity
+);
 router.post(
   "/subject",
   [
