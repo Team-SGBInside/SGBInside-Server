@@ -28,7 +28,9 @@ model User {
   school                            String                              @db.VarChar(30)
   grade                             Int
   isTeen                            Boolean
+  Book_Activity                     Book_Activity[]
   Creative_Activity                 Creative_Activity[]
+  Prize_Activity                    Prize_Activity[]
   Subject_Detailed_Ability_Activity Subject_Detailed_Ability_Activity[]
 }
 
@@ -44,4 +46,34 @@ model Subject_Detailed_Ability_Activity {
   subjectFurtherStudy   String? @db.VarChar(300)
   writerId              Int
   User                  User    @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
+}
+
+model Book_Activity {
+  activity_id     Int     @id @default(autoincrement())
+  title_author    String  @db.VarChar(100)
+  start_date      String  @db.VarChar(30)
+  end_date        String  @db.VarChar(30)
+  semester        String? @db.VarChar(10)
+  thoughts        String
+  related_subject String  @db.VarChar(100)
+  quote1          String? @db.VarChar(100)
+  quote2          String? @db.VarChar(100)
+  quote3          String? @db.VarChar(100)
+  quote4          String? @db.VarChar(100)
+  quote5          String? @db.VarChar(100)
+  writerId        Int
+  User            User    @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
+}
+
+model Prize_Activity {
+  activityId Int     @id @default(autoincrement())
+  name       String  @db.VarChar(30)
+  prize      String? @db.VarChar(20)
+  date       String  @db.VarChar(30)
+  semester   String  @db.VarChar(10)
+  prizeImage String? @db.VarChar(200)
+  role       String  @db.VarChar(300)
+  thoughts   String? @db.VarChar(300)
+  writerId   Int
+  User       User    @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
 }
