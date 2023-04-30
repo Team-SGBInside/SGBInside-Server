@@ -15,7 +15,7 @@ const createCreativeActivity = async (req: Request, res: Response) => {
   const userId = req.user.userId;
 
   const data = await activityService.createCreativeActivity(
-    +userId,
+    userId,
     name,
     activityType,
     date,
@@ -40,6 +40,12 @@ const createSubjectDetailedActivity = async (req: Request, res: Response) => {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
+  const userId = req.body.userId;
+
+  if (!userId) {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  }
+
   try {
     const subjectDetailedActivityCreateDTO: SubjectDetailedActivityCreateDTO =
       req.body;
@@ -49,7 +55,7 @@ const createSubjectDetailedActivity = async (req: Request, res: Response) => {
 
     return res
       .status(sc.OK)
-      .send(success(sc.OK, rm.CREATE_SUBJECT_DETAILED_ACTIVITY_SUCCESS));
+      .send(success(sc.OK, rm.CREATE_SUBJECT_DETAILED_ACTIVITY_SUCCESS, data));
   } catch (error) {
     return res
       .status(sc.INTERNAL_SERVER_ERROR)
