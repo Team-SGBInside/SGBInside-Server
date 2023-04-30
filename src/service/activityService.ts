@@ -1,3 +1,4 @@
+import { PrizeActivityCreateDTO } from "./../interfaces/activity/PrizeActivityCreateDTO";
 import { CreativeActivityCreateDTO } from "./../interfaces/activity/CreativeActivityCreateDTO";
 import { SubjectDetailedActivityCreateDTO } from "./../interfaces/activity/SubjectDetailedActivityCreateDTO";
 import { PrismaClient } from "@prisma/client";
@@ -44,9 +45,31 @@ const createSubjectDetailedActivity = async (
   const activityId = data.activityId;
   return { activityId };
 };
+
+// 수상경력 기록
+const createPrizeActivity = async (
+  prizeActivityCreateDTO: PrizeActivityCreateDTO
+) => {
+  const data = await prisma.prize_Activity.create({
+    data: {
+      writerId: prizeActivityCreateDTO.userId,
+      name: prizeActivityCreateDTO.name,
+      prize: prizeActivityCreateDTO.prize,
+      date: prizeActivityCreateDTO.date,
+      semester: prizeActivityCreateDTO.semester,
+      prizeImage: prizeActivityCreateDTO.prizeImage,
+      role: prizeActivityCreateDTO.role,
+      thoughts: prizeActivityCreateDTO.thoughts,
+    },
+  });
+  const activityId = data.activityId;
+  return { activityId };
+};
+
 const activityService = {
   createCreativeActivity,
   createSubjectDetailedActivity,
+  createPrizeActivity,
 };
 
 export default activityService;
