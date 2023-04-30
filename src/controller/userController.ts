@@ -1,11 +1,11 @@
-import { UserCreateDTO } from "./../interfaces/UserCreateDTO";
+import { UserCreateDTO } from "../interfaces/user/UserCreateDTO";
 import { Request, Response } from "express";
 import { userService } from "../service";
 import { validationResult } from "express-validator";
 import { rm, sc } from "../constants";
 import { fail, success } from "../constants/response";
 import jwtHandler from "../modules/jwtHandler";
-import { UserSignInDTO } from "../interfaces/UserSignInDTO";
+import { UserSignInDTO } from "../interfaces/user/UserSignInDTO";
 
 // 유저 생성
 const createUser = async (req: Request, res: Response) => {

@@ -19,7 +19,7 @@ const createCreativeActivity = async (
       semester,
       role,
       thoughts,
-      writerId: userId,
+      writerId: +userId,
     },
   });
 };
