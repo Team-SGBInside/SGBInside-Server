@@ -1,6 +1,6 @@
-import { UserSignInDTO } from "./../interfaces/UserSignInDTO";
+import { UserSignInDTO } from "../interfaces/user/UserSignInDTO";
 import { PrismaClient } from "@prisma/client";
-import { UserCreateDTO } from "../interfaces/UserCreateDTO";
+import { UserCreateDTO } from "../interfaces/user/UserCreateDTO";
 import bcrypt from "bcryptjs";
 import { sc } from "../constants";
 

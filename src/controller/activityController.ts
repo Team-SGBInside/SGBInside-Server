@@ -1,3 +1,4 @@
+import { SubjectDetailedActivityCreateDTO } from "./../interfaces/activity/SubjectDetailedActivityCreateDTO";
 import { Request, Response } from "express";
 import { activityService } from "../service";
 import { validationResult } from "express-validator";
@@ -33,8 +34,22 @@ const createCreativeActivity = async (req: Request, res: Response) => {
     .json({ status: 200, message: "창의적 체험활동 기록 성공", data });
 };
 
+const createSubjectDetailedActivity = async (req: Request, res: Response) => {
+  const error = validationResult(req);
+  if (!error.isEmpty()) {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  }
+
+  const subjectDetailedActivityCreateDTO: SubjectDetailedActivityCreateDTO =
+    req.body;
+  const data = await activityService.createSubjectDetailedActivity(
+    subjectDetailedActivityCreateDTO
+  );
+};
+
 const activityController = {
   createCreativeActivity,
+  createSubjectDetailedActivity,
 };
 
 export default activityController;
