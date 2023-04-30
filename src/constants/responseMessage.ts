@@ -30,4 +30,7 @@ export default {
 
   // 서버 내 오류
   INTERNAL_SERVER_ERROR: "서버 내 오류",
+
+  // 활동 기록
+  CREATE_SUBJECT_DETAILED_ACTIVITY_SUCCESS: "세부능력 특기사항 활동 기록 성공",
 };
