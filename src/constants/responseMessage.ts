@@ -32,5 +32,6 @@ export default {
   INTERNAL_SERVER_ERROR: "서버 내 오류",
 
   // 활동 기록
+  CREATE_CREATIVE_ACTIVITY_SUCCESS: "창의적 체험활동 기록 성공",
   CREATE_SUBJECT_DETAILED_ACTIVITY_SUCCESS: "세부능력 특기사항 활동 기록 성공",
 };
