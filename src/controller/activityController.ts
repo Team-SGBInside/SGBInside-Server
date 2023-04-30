@@ -40,11 +40,21 @@ const createSubjectDetailedActivity = async (req: Request, res: Response) => {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
-  const subjectDetailedActivityCreateDTO: SubjectDetailedActivityCreateDTO =
-    req.body;
-  const data = await activityService.createSubjectDetailedActivity(
-    subjectDetailedActivityCreateDTO
-  );
+  try {
+    const subjectDetailedActivityCreateDTO: SubjectDetailedActivityCreateDTO =
+      req.body;
+    const data = await activityService.createSubjectDetailedActivity(
+      subjectDetailedActivityCreateDTO
+    );
+
+    return res
+      .status(sc.OK)
+      .send(success(sc.OK, rm.CREATE_SUBJECT_DETAILED_ACTIVITY_SUCCESS));
+  } catch (error) {
+    return res
+      .status(sc.INTERNAL_SERVER_ERROR)
+      .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+  }
 };
 
 const activityController = {
