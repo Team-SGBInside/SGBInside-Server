@@ -1,3 +1,4 @@
+import { BookActivityCreateDTO } from "./../interfaces/activity/BookActivityCreateDTO";
 import { PrizeActivityCreateDTO } from "./../interfaces/activity/PrizeActivityCreateDTO";
 import { CreativeActivityCreateDTO } from "./../interfaces/activity/CreativeActivityCreateDTO";
 import { SubjectDetailedActivityCreateDTO } from "./../interfaces/activity/SubjectDetailedActivityCreateDTO";
@@ -91,10 +92,38 @@ const createPrizeActivity = async (req: Request, res: Response) => {
   }
 };
 
+const createBookActivity = async (req: Request, res: Response) => {
+  const error = validationResult(req);
+  if (!error.isEmpty()) {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  }
+
+  const userId = req.body.userId;
+
+  if (!userId) {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  }
+
+  try {
+    const bookActivityCreateDTO: BookActivityCreateDTO = req.body;
+    const data = await activityService.createBookActivity(
+      bookActivityCreateDTO
+    );
+    return res
+      .status(sc.OK)
+      .send(success(sc.OK, rm.CREATE_BOOK_ACTIVITY_SUCCESS));
+  } catch (error) {
+    return res
+      .status(sc.INTERNAL_SERVER_ERROR)
+      .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+  }
+};
+
 const activityController = {
   createCreativeActivity,
   createSubjectDetailedActivity,
   createPrizeActivity,
+  createBookActivity,
 };
 
 export default activityController;
