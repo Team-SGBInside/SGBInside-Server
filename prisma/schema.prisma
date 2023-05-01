@@ -23,7 +23,7 @@ model Creative_Activity {
 model User {
   userId                            Int                                 @id @unique @default(autoincrement())
   loginId                           String                              @db.VarChar(20)
-  password                          String                              @db.VarChar(20)
+  password                          String                              @db.VarChar(200)
   name                              String                              @db.VarChar(20)
   school                            String                              @db.VarChar(20)
   grade                             Int
