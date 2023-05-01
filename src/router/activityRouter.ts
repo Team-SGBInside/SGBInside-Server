@@ -30,4 +30,16 @@ router.post(
   ],
   activityController.createSubjectDetailedActivity
 );
+
+router.post(
+  "/prize",
+  [
+    body("name").trim().notEmpty(),
+    body("date").trim().notEmpty(),
+    body("semester").trim().notEmpty(),
+    body("role").trim().notEmpty(),
+  ],
+  activityController.createPrizeActivity
+);
+
 export default router;
