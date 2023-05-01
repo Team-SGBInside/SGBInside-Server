@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Creative_Activity {
-  activityId   Int     @id @default(autoincrement())
+  activityId   Int     @id @unique @default(autoincrement())
   name         String  @db.VarChar(30)
   activityType String  @db.VarChar(10)
   startDate    String  @db.VarChar(30)
@@ -21,16 +21,16 @@ model Creative_Activity {
 }
 
 model User {
-  userId                            Int                                 @id @default(autoincrement())
+  userId                            Int                                 @id @unique @default(autoincrement())
   loginId                           String                              @db.VarChar(20)
-  password                          String                              @db.VarChar(100)
+  password                          String                              @db.VarChar(20)
   name                              String                              @db.VarChar(20)
-  school                            String                              @db.VarChar(30)
+  school                            String                              @db.VarChar(20)
   grade                             Int
   isTeen                            Boolean
-  Book_Activity                     Book_Activity[]
   Creative_Activity                 Creative_Activity[]
   Prize_Activity                    Prize_Activity[]
+  Reading_Activity                  Reading_Activity[]
   Subject_Detailed_Ability_Activity Subject_Detailed_Ability_Activity[]
 }
 
@@ -42,27 +42,10 @@ model Subject_Detailed_Ability_Activity {
   startDate             String  @db.VarChar(30)
   endDate               String  @db.VarChar(30)
   mainActivity          String  @db.VarChar(100)
-  activityContentDetail String? @db.VarChar(300)
+  activityContentDetail String  @db.VarChar(300)
   subjectFurtherStudy   String? @db.VarChar(300)
   writerId              Int
   User                  User    @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
-}
-
-model Book_Activity {
-  activityId     Int     @id @default(autoincrement())
-  titleAuthor    String  @db.VarChar(100)
-  startDate      String  @db.VarChar(30)
-  endDate        String  @db.VarChar(30)
-  semester       String? @db.VarChar(10)
-  thoughts       String
-  relatedSubject String  @db.VarChar(100)
-  quote1         String? @db.VarChar(100)
-  quote2         String? @db.VarChar(100)
-  quote3         String? @db.VarChar(100)
-  quote4         String? @db.VarChar(100)
-  quote5         String? @db.VarChar(100)
-  writerId       Int
-  User           User    @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
 }
 
 model Prize_Activity {
@@ -76,4 +59,21 @@ model Prize_Activity {
   thoughts   String? @db.VarChar(300)
   writerId   Int
   User       User    @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
+}
+
+model Reading_Activity {
+  activityId     Int     @id @default(autoincrement())
+  titleAuthor    String  @db.VarChar(30)
+  startDate      String  @db.VarChar(30)
+  endDate        String  @db.VarChar(30)
+  semester       String? @db.VarChar(10)
+  thoughts       String? @db.VarChar(300)
+  relatedSubject String  @db.VarChar(20)
+  quote1         String? @db.VarChar(100)
+  quote2         String? @db.VarChar(100)
+  quote3         String? @db.VarChar(100)
+  quote4         String? @db.VarChar(100)
+  quote5         String? @db.VarChar(100)
+  writerId       Int
+  User           User    @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
 }
