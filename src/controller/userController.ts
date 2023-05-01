@@ -30,14 +30,14 @@ const createUser = async (req: Request, res: Response) => {
   const accessToken = jwtHandler.sign(data.userId);
 
   const result = {
-    id: data.userId,
+    userId: data.userId,
     name: data.name,
     accessToken,
   };
 
   return res
     .status(sc.CREATED)
-    .send(success(sc.CREATED, rm.SIGNIN_SUCCESS, data));
+    .send(success(sc.CREATED, rm.SIGNUP_SUCCESS, result));
 };
 
 // 로그인
@@ -64,7 +64,7 @@ const signInUser = async (req: Request, res: Response) => {
     const accessToken = jwtHandler.sign(userId);
 
     const result = {
-      id: userId,
+      userId: userId,
       accessToken,
     };
 

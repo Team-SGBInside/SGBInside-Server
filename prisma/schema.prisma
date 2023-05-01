@@ -28,9 +28,9 @@ model User {
   school                            String                              @db.VarChar(20)
   grade                             Int
   isTeen                            Boolean
+  Book_Activity                     Book_Activity[]
   Creative_Activity                 Creative_Activity[]
   Prize_Activity                    Prize_Activity[]
-  Reading_Activity                  Reading_Activity[]
   Subject_Detailed_Ability_Activity Subject_Detailed_Ability_Activity[]
 }
 
@@ -61,8 +61,8 @@ model Prize_Activity {
   User       User    @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
 }
 
-model Reading_Activity {
-  activityId     Int     @id @default(autoincrement())
+model Book_Activity {
+  activityId     Int     @id(map: "Reading_Activity_pkey") @default(autoincrement())
   titleAuthor    String  @db.VarChar(30)
   startDate      String  @db.VarChar(30)
   endDate        String  @db.VarChar(30)
