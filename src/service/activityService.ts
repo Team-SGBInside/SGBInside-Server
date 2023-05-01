@@ -2,6 +2,7 @@ import { PrizeActivityCreateDTO } from "./../interfaces/activity/PrizeActivityCr
 import { CreativeActivityCreateDTO } from "./../interfaces/activity/CreativeActivityCreateDTO";
 import { SubjectDetailedActivityCreateDTO } from "./../interfaces/activity/SubjectDetailedActivityCreateDTO";
 import { PrismaClient } from "@prisma/client";
+import { BookActivityCreateDTO } from "../interfaces/activity/BookActivityCreateDTO";
 const prisma = new PrismaClient();
 
 // 창의적 체험활동 기록
@@ -66,10 +67,34 @@ const createPrizeActivity = async (
   return { activityId };
 };
 
+// 독서활동 기록
+const createBookActivity = async (
+  bookActivityCreateDTO: BookActivityCreateDTO
+) => {
+  const data = await prisma.book_Activity.create({
+    data: {
+      writerId: bookActivityCreateDTO.userId,
+      titleAuthor: bookActivityCreateDTO.titleAuthor,
+      startDate: bookActivityCreateDTO.startDate,
+      endDate: bookActivityCreateDTO.endDate,
+      semester: bookActivityCreateDTO.semester,
+      thoughts: bookActivityCreateDTO.thoughts,
+      relatedSubject: bookActivityCreateDTO.relatedSubject,
+      quote1: bookActivityCreateDTO.quote1,
+      quote2: bookActivityCreateDTO.quote2,
+      quote3: bookActivityCreateDTO.quote3,
+      quote4: bookActivityCreateDTO.quote4,
+      quote5: bookActivityCreateDTO.quote5,
+    },
+  });
+  const activityId = data.activity_id;
+  return { activityId };
+};
 const activityService = {
   createCreativeActivity,
   createSubjectDetailedActivity,
   createPrizeActivity,
+  createBookActivity,
 };
 
 export default activityService;

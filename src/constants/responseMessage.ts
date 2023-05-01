@@ -35,4 +35,5 @@ export default {
   CREATE_CREATIVE_ACTIVITY_SUCCESS: "창의적 체험활동 기록 성공",
   CREATE_SUBJECT_DETAILED_ACTIVITY_SUCCESS: "세부능력 특기사항 활동 기록 성공",
   CREATE_PRIZE_ACTIVITY_SUCCESS: "수상경력 활동 기록 성공",
+  CREATE_BOOK_ACTIVITY_SUCCESS: "독서활동 기록 성공",
 };
