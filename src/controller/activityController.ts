@@ -1,3 +1,4 @@
+import { CreativeActivityCreateDTO } from "./../interfaces/activity/CreativeActivityCreateDTO";
 import { SubjectDetailedActivityCreateDTO } from "./../interfaces/activity/SubjectDetailedActivityCreateDTO";
 import { Request, Response } from "express";
 import { activityService } from "../service";
@@ -11,27 +12,25 @@ const createCreativeActivity = async (req: Request, res: Response) => {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
-  const { name, activityType, date, semester, role, thoughts } = req.body;
-  const userId = req.user.userId;
-
-  const data = await activityService.createCreativeActivity(
-    userId,
-    name,
-    activityType,
-    date,
-    semester,
-    role,
-    thoughts
-  );
-
+  const creativeActivityCreateDTO: CreativeActivityCreateDTO = req.body;
+  const userId = req.body.userId;
   if (!userId) {
-    return res
-      .status(400)
-      .json({ status: 400, message: "창의적 체험활동 기록 실패" });
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
-  return res
-    .status(200)
-    .json({ status: 200, message: "창의적 체험활동 기록 성공", data });
+
+  try {
+    const data = await activityService.createCreativeActivity(
+      creativeActivityCreateDTO
+    );
+
+    return res
+      .status(sc.OK)
+      .send(success(sc.OK, rm.CREATE_CREATIVE_ACTIVITY_SUCCESS, data));
+  } catch (error) {
+    return res
+      .status(sc.INTERNAL_SERVER_ERROR)
+      .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+  }
 };
 
 const createSubjectDetailedActivity = async (req: Request, res: Response) => {
