@@ -111,7 +111,7 @@ const createBookActivity = async (req: Request, res: Response) => {
     );
     return res
       .status(sc.OK)
-      .send(success(sc.OK, rm.CREATE_BOOK_ACTIVITY_SUCCESS));
+      .send(success(sc.OK, rm.CREATE_BOOK_ACTIVITY_SUCCESS, data));
   } catch (error) {
     return res
       .status(sc.INTERNAL_SERVER_ERROR)
