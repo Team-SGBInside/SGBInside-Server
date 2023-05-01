@@ -87,7 +87,7 @@ const createBookActivity = async (
       quote5: bookActivityCreateDTO.quote5,
     },
   });
-  const activityId = data.activity_id;
+  const activityId = data.activityId;
   return { activityId };
 };
 const activityService = {
