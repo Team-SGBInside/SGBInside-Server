@@ -16,8 +16,8 @@ model Creative_Activity {
   semester     String  @db.VarChar(10)
   role         String  @db.VarChar(300)
   thoughts     String? @db.VarChar(300)
-  writerId     Int
-  User         User    @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
+  writerId     Int?
+  User         User?   @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
 }
 
 model User {
@@ -27,6 +27,7 @@ model User {
   name                              String                              @db.VarChar(20)
   school                            String                              @db.VarChar(20)
   grade                             Int
+  age                               Int
   isTeen                            Boolean
   Book_Activity                     Book_Activity[]
   Creative_Activity                 Creative_Activity[]
@@ -35,7 +36,7 @@ model User {
 }
 
 model Subject_Detailed_Ability_Activity {
-  activityId            Int     @id @default(autoincrement())
+  activityId            Int     @id @unique @default(autoincrement())
   subjectName           String  @db.VarChar(20)
   subjectContent        String  @db.VarChar(100)
   activitySemester      String  @db.VarChar(20)
@@ -44,12 +45,12 @@ model Subject_Detailed_Ability_Activity {
   mainActivity          String  @db.VarChar(100)
   activityContentDetail String  @db.VarChar(300)
   subjectFurtherStudy   String? @db.VarChar(300)
-  writerId              Int
-  User                  User    @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
+  writerId              Int?
+  User                  User?   @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
 }
 
 model Prize_Activity {
-  activityId Int     @id @default(autoincrement())
+  activityId Int     @id @unique @default(autoincrement())
   name       String  @db.VarChar(30)
   prize      String? @db.VarChar(20)
   date       String  @db.VarChar(30)
@@ -57,23 +58,23 @@ model Prize_Activity {
   prizeImage String? @db.VarChar(200)
   role       String  @db.VarChar(300)
   thoughts   String? @db.VarChar(300)
-  writerId   Int
-  User       User    @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
+  writerId   Int?
+  User       User?   @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
 }
 
 model Book_Activity {
-  activityId     Int     @id(map: "Reading_Activity_pkey") @default(autoincrement())
+  activityId     Int     @id @unique @default(autoincrement())
   titleAuthor    String  @db.VarChar(30)
-  startDate      String  @db.VarChar(30)
+  startDate      String? @db.VarChar(30)
   endDate        String  @db.VarChar(30)
-  semester       String? @db.VarChar(10)
-  thoughts       String? @db.VarChar(300)
-  relatedSubject String  @db.VarChar(20)
+  semester       String  @db.VarChar(10)
+  thoughts       String  @db.VarChar(300)
+  relatedSubject String? @db.VarChar(20)
   quote1         String? @db.VarChar(100)
   quote2         String? @db.VarChar(100)
   quote3         String? @db.VarChar(100)
   quote4         String? @db.VarChar(100)
   quote5         String? @db.VarChar(100)
-  writerId       Int
-  User           User    @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
+  writerId       Int?
+  User           User?   @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
 }

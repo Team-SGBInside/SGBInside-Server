@@ -40,15 +40,13 @@ const createUser = async (req: Request, res: Response) => {
     return res
       .status(sc.CREATED)
       .send(success(sc.CREATED, rm.SIGNUP_SUCCESS, result));
-
-  } catch(e) {
-    console.log(error);
+  } catch (e) {
+    console.log(e);
     // 서버 내부에서 오류 발생
     res
       .status(sc.INTERNAL_SERVER_ERROR)
       .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
   }
-  
 };
 
 // 로그인
