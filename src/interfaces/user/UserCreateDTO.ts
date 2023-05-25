@@ -4,5 +4,6 @@ export interface UserCreateDTO {
   name: string;
   school: string;
   grade: number;
+  age: number;
   isTeen: boolean;
 }

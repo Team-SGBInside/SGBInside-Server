@@ -18,6 +18,9 @@ const createUser = async (req: Request, res: Response) => {
   }
 
   const userCreateDTO: UserCreateDTO = req.body;
+  const grade = req.body.grade;
+  const age = req.body.age;
+  const isTeen = req.body.isTeen;
 
   try {
     const data = await userService.createUser(userCreateDTO);
@@ -26,6 +29,12 @@ const createUser = async (req: Request, res: Response) => {
       return res
         .status(sc.BAD_REQUEST)
         .send(fail(sc.BAD_REQUEST, rm.SIGNUP_FAIL));
+    }
+
+    if (!grade || !age || !isTeen) {
+      return res
+        .status(sc.BAD_REQUEST)
+        .send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
     }
 
     // jwtHandler 내 sign 함수를 이용해 accessToken 생성
