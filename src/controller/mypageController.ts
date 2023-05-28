@@ -5,13 +5,12 @@ import { fail, success } from "../constants/response";
 import { mypageService } from "../service";
 
 const getMypage = async (req: Request, res: Response) => {
-  const userId = req.user.userId;
-  console.log(userId);
+  const userId = req.body.userId;
   if (!userId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
   try {
-    const accountInfo = await mypageService.getAccountInfoByUserId(+userId);
+    const accountInfo = await mypageService.getAccountInfoByUserId(userId);
     //const allActivity = await mypageService.getActivityByUserId(+userId);
     const data = {
       name: accountInfo?.name,
