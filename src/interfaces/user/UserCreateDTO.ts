@@ -3,7 +3,7 @@ export interface UserCreateDTO {
   password: string;
   name: string;
   school: string;
-  grade: number;
-  age: number;
+  grade: string;
+  age: string;
   isTeen: boolean;
 }

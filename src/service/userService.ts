@@ -14,13 +14,13 @@ const createUser = async (userCreateDTO: UserCreateDTO) => {
   const isTeen = Boolean(userCreateDTO?.isTeen);
   const data = await prisma.user.create({
     data: {
-      loginId: userCreateDTO?.loginId,
-      name: userCreateDTO?.name,
-      school: userCreateDTO?.school,
-      grade: +userCreateDTO?.grade,
+      loginId: userCreateDTO.loginId,
+      password,
+      name: userCreateDTO.name,
+      school: userCreateDTO.school,
+      grade: userCreateDTO.grade,
       age: userCreateDTO.age,
       isTeen,
-      password,
     },
   });
 
