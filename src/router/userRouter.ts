@@ -22,7 +22,7 @@ router.post(
 // 로그인 - POST ~/auth/signin
 router.post(
   "/signin",
-  [body("loginId").notEmpty(), body("password").notEmpty()],
+  [(body("loginId").notEmpty(), body("password").notEmpty())],
   userController.signInUser
 );
 export default router;

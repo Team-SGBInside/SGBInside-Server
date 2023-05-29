@@ -36,4 +36,7 @@ export default {
   CREATE_SUBJECT_DETAILED_ACTIVITY_SUCCESS: "세부능력 특기사항 활동 기록 성공",
   CREATE_PRIZE_ACTIVITY_SUCCESS: "수상경력 활동 기록 성공",
   CREATE_BOOK_ACTIVITY_SUCCESS: "독서활동 기록 성공",
+
+  // 마이페이지
+  GET_ACCOUNT_INFO_SUCCESS: "마이페이지 계정 정보 조회 성공",
 };
