@@ -75,11 +75,18 @@ const getTotalActivityByUserId = async (userId: number, sort: string) => {
     },
   });
 
+  const activityCount =
+    allcreativeActivity.length +
+    allSubjectDetailedActivity.length +
+    allPrizeActivity.length +
+    allBookActivity.length;
+
   const data = {
-    allcreativeActivity: allcreativeActivity,
-    allSubjectDetailedActivity: allSubjectDetailedActivity,
-    allPrizeActivity: allPrizeActivity,
-    allBookActivity: allBookActivity,
+    activityCount,
+    allcreativeActivity,
+    allSubjectDetailedActivity,
+    allPrizeActivity,
+    allBookActivity,
   };
 
   return data;
