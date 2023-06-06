@@ -14,12 +14,19 @@ const getMypage = async (req: Request, res: Response) => {
     //const allActivity = await mypageService.getActivityByUserId(+userId);
     const totalActivity = await mypageService.getTotalActivityByUserId(userId);
 
+    const activityCount =
+      totalActivity.allcreativeActivity.length +
+      totalActivity.allSubjectDetailedActivity.length +
+      totalActivity.allPrizeActivity.length +
+      totalActivity.allBookActivity.length;
+
     const data = {
       userId: accountInfo?.userId,
       name: accountInfo?.name,
       school: accountInfo?.school,
       grade: accountInfo?.grade,
       age: accountInfo?.age,
+      activityCount: activityCount,
       totalActivity: totalActivity,
     };
     return res
