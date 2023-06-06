@@ -12,11 +12,15 @@ const getMypage = async (req: Request, res: Response) => {
   try {
     const accountInfo = await mypageService.getAccountInfoByUserId(userId);
     //const allActivity = await mypageService.getActivityByUserId(+userId);
+    const totalActivity = await mypageService.getTotalActivityByUserId(userId);
+
     const data = {
+      userId: accountInfo?.userId,
       name: accountInfo?.name,
       school: accountInfo?.school,
       grade: accountInfo?.grade,
       age: accountInfo?.age,
+      totalActivity: totalActivity,
     };
     return res
       .status(sc.OK)
