@@ -42,7 +42,7 @@ const createSubjectDetailedActivity = async (req: Request, res: Response) => {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
-  const userId = req.body.userId;
+  const userId = req.user.userId;
 
   if (!userId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
@@ -52,7 +52,8 @@ const createSubjectDetailedActivity = async (req: Request, res: Response) => {
     const subjectDetailedActivityCreateDTO: SubjectDetailedActivityCreateDTO =
       req.body;
     const data = await activityService.createSubjectDetailedActivity(
-      subjectDetailedActivityCreateDTO
+      subjectDetailedActivityCreateDTO,
+      userId
     );
 
     return res

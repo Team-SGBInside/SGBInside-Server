@@ -28,11 +28,11 @@ const createCreativeActivity = async (
 
 // 과목별 세부능력 특기사항 활동 기록
 const createSubjectDetailedActivity = async (
-  subjectDetailedActivityCreateDTO: SubjectDetailedActivityCreateDTO
+  subjectDetailedActivityCreateDTO: SubjectDetailedActivityCreateDTO,
+  userId: number
 ) => {
   const data = await prisma.subject_Detailed_Ability_Activity.create({
     data: {
-      writerId: subjectDetailedActivityCreateDTO.userId,
       subjectName: subjectDetailedActivityCreateDTO.subjectName,
       subjectContent: subjectDetailedActivityCreateDTO.subjectContent,
       activitySemester: subjectDetailedActivityCreateDTO.activitySemester,
@@ -42,10 +42,11 @@ const createSubjectDetailedActivity = async (
       activityContentDetail:
         subjectDetailedActivityCreateDTO.activityContentDetail,
       subjectFurtherStudy: subjectDetailedActivityCreateDTO.subjectFurtherStudy,
+      writerId: userId,
     },
   });
   const activityId = data.activityId;
-  return { activityId };
+  return data;
 };
 
 // 수상경력 기록
