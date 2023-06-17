@@ -78,7 +78,6 @@ const createBookActivity = async (
   const data = await prisma.book_Activity.create({
     data: {
       titleAuthor: bookActivityCreateDTO.titleAuthor,
-      startDate: bookActivityCreateDTO.startDate,
       endDate: bookActivityCreateDTO.endDate,
       semester: bookActivityCreateDTO.semester,
       thoughts: bookActivityCreateDTO.thoughts,

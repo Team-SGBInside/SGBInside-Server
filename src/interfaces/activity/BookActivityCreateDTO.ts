@@ -1,6 +1,5 @@
 export interface BookActivityCreateDTO {
   titleAuthor: string;
-  startDate: string;
   endDate: string;
   semester: string;
   thoughts: string;
