@@ -53,7 +53,7 @@ const createPrizeActivity = async (
 ) => {
   const data = await prisma.prize_Activity.create({
     data: {
-      writerId: prizeActivityCreateDTO.userId,
+      userId: prizeActivityCreateDTO.userId,
       name: prizeActivityCreateDTO.name,
       prize: prizeActivityCreateDTO.prize,
       date: prizeActivityCreateDTO.date,

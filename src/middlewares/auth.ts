@@ -4,6 +4,7 @@ import { rm, sc } from "../constants";
 import { fail } from "../constants/response";
 import tokenType from "../constants/tokenType";
 import jwtHandler from "../modules/jwtHandler";
+import { userService } from "../service";
 
 export default async (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization?.split(" ").reverse()[0]; //? Bearer ~~ 에서 토큰만 파싱
@@ -34,6 +35,15 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 
     //? 얻어낸 userId 를 Request Body 내 userId 필드에 담고, 다음 미들웨어로 넘김( next() )
     req.body.userId = userId;
+
+    const foundUser = await userService.getUserById(userId);
+    if (!foundUser) {
+      return res
+        .status(sc.BAD_REQUEST)
+        .send(fail(sc.BAD_REQUEST, rm.NOT_EXISITING_USER));
+    }
+
+    req.user = foundUser;
     next();
   } catch (error) {
     console.log(error);
