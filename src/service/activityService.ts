@@ -72,11 +72,11 @@ const createPrizeActivity = async (
 
 // 독서활동 기록
 const createBookActivity = async (
-  bookActivityCreateDTO: BookActivityCreateDTO
+  bookActivityCreateDTO: BookActivityCreateDTO,
+  userId: number
 ) => {
   const data = await prisma.book_Activity.create({
     data: {
-      writerId: bookActivityCreateDTO.userId,
       titleAuthor: bookActivityCreateDTO.titleAuthor,
       startDate: bookActivityCreateDTO.startDate,
       endDate: bookActivityCreateDTO.endDate,
@@ -88,10 +88,11 @@ const createBookActivity = async (
       quote3: bookActivityCreateDTO.quote3,
       quote4: bookActivityCreateDTO.quote4,
       quote5: bookActivityCreateDTO.quote5,
+      writerId: userId,
     },
   });
   const activityId = data.activityId;
-  return { activityId };
+  return data;
 };
 const activityService = {
   createCreativeActivity,

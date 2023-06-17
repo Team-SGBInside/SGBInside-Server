@@ -101,7 +101,7 @@ const createBookActivity = async (req: Request, res: Response) => {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
-  const userId = req.body.userId;
+  const userId = req.user.userId;
 
   if (!userId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
@@ -110,7 +110,8 @@ const createBookActivity = async (req: Request, res: Response) => {
   try {
     const bookActivityCreateDTO: BookActivityCreateDTO = req.body;
     const data = await activityService.createBookActivity(
-      bookActivityCreateDTO
+      bookActivityCreateDTO,
+      userId
     );
     return res
       .status(sc.OK)
