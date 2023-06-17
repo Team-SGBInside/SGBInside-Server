@@ -72,7 +72,7 @@ const createPrizeActivity = async (req: Request, res: Response) => {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
-  const userId = req.body.userId;
+  const userId = req.user.userId;
 
   if (!userId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
@@ -81,7 +81,8 @@ const createPrizeActivity = async (req: Request, res: Response) => {
   try {
     const prizeActivityCreateDTO: PrizeActivityCreateDTO = req.body;
     const data = await activityService.createPrizeActivity(
-      prizeActivityCreateDTO
+      prizeActivityCreateDTO,
+      userId
     );
 
     return res
