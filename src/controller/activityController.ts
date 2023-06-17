@@ -15,14 +15,15 @@ const createCreativeActivity = async (req: Request, res: Response) => {
   }
 
   const creativeActivityCreateDTO: CreativeActivityCreateDTO = req.body;
-  const userId = req.body.userId;
+  const userId = req.user.userId;
   if (!userId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
   try {
     const data = await activityService.createCreativeActivity(
-      creativeActivityCreateDTO
+      creativeActivityCreateDTO,
+      userId
     );
 
     return res
