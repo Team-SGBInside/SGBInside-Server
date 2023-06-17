@@ -19,6 +19,7 @@ export default {
   DELETE_USER_SUCCESS: "유저 탈퇴 성공",
   DELETE_USER_FAIL: "유저 탈퇴 실패",
   NO_USER: "탈퇴했거나 가입하지 않은 유저입니다.",
+  NOT_EXISITING_USER: "존재하지 않는 유저입니다.",
 
   // 토큰
   CREATE_TOKEN_SUCCESS: "토큰 재발급 성공",

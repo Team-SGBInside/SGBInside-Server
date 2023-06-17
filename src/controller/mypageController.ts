@@ -5,7 +5,7 @@ import { fail, success } from "../constants/response";
 import { mypageService } from "../service";
 
 const getMypage = async (req: Request, res: Response) => {
-  const userId = req.body.userId;
+  const userId = req.user.userId;
   if (!userId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
@@ -13,10 +13,13 @@ const getMypage = async (req: Request, res: Response) => {
     const accountInfo = await mypageService.getAccountInfoByUserId(userId);
     //const allActivity = await mypageService.getActivityByUserId(+userId);
     const data = {
+      userId: accountInfo?.userId,
+      loginId: accountInfo?.loginId,
       name: accountInfo?.name,
       school: accountInfo?.school,
       grade: accountInfo?.grade,
       age: accountInfo?.age,
+      isTeen: accountInfo?.isTeen,
     };
     return res
       .status(sc.OK)

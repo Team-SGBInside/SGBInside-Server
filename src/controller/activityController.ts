@@ -15,14 +15,15 @@ const createCreativeActivity = async (req: Request, res: Response) => {
   }
 
   const creativeActivityCreateDTO: CreativeActivityCreateDTO = req.body;
-  const userId = req.body.userId;
+  const userId = req.user.userId;
   if (!userId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
   try {
     const data = await activityService.createCreativeActivity(
-      creativeActivityCreateDTO
+      creativeActivityCreateDTO,
+      userId
     );
 
     return res
@@ -41,7 +42,7 @@ const createSubjectDetailedActivity = async (req: Request, res: Response) => {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
-  const userId = req.body.userId;
+  const userId = req.user.userId;
 
   if (!userId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
@@ -51,7 +52,8 @@ const createSubjectDetailedActivity = async (req: Request, res: Response) => {
     const subjectDetailedActivityCreateDTO: SubjectDetailedActivityCreateDTO =
       req.body;
     const data = await activityService.createSubjectDetailedActivity(
-      subjectDetailedActivityCreateDTO
+      subjectDetailedActivityCreateDTO,
+      userId
     );
 
     return res
@@ -70,7 +72,7 @@ const createPrizeActivity = async (req: Request, res: Response) => {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
-  const userId = req.body.userId;
+  const userId = req.user.userId;
 
   if (!userId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
@@ -79,7 +81,8 @@ const createPrizeActivity = async (req: Request, res: Response) => {
   try {
     const prizeActivityCreateDTO: PrizeActivityCreateDTO = req.body;
     const data = await activityService.createPrizeActivity(
-      prizeActivityCreateDTO
+      prizeActivityCreateDTO,
+      userId
     );
 
     return res
@@ -98,7 +101,7 @@ const createBookActivity = async (req: Request, res: Response) => {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
-  const userId = req.body.userId;
+  const userId = req.user.userId;
 
   if (!userId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
@@ -107,7 +110,8 @@ const createBookActivity = async (req: Request, res: Response) => {
   try {
     const bookActivityCreateDTO: BookActivityCreateDTO = req.body;
     const data = await activityService.createBookActivity(
-      bookActivityCreateDTO
+      bookActivityCreateDTO,
+      userId
     );
     return res
       .status(sc.OK)

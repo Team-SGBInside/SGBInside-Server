@@ -7,11 +7,11 @@ const prisma = new PrismaClient();
 
 // 창의적 체험활동 기록
 const createCreativeActivity = async (
-  creativeActivityCreateDTO: CreativeActivityCreateDTO
+  creativeActivityCreateDTO: CreativeActivityCreateDTO,
+  userId: number
 ) => {
   const data = await prisma.creative_Activity.create({
     data: {
-      writerId: creativeActivityCreateDTO.userId,
       name: creativeActivityCreateDTO.name,
       activityType: creativeActivityCreateDTO.activityType,
       startDate: creativeActivityCreateDTO.startDate,
@@ -19,19 +19,20 @@ const createCreativeActivity = async (
       semester: creativeActivityCreateDTO.semester,
       role: creativeActivityCreateDTO.role,
       thoughts: creativeActivityCreateDTO.thoughts,
+      writerId: userId,
     },
   });
   const activityId = data.activityId;
-  return { activityId };
+  return data;
 };
 
 // 과목별 세부능력 특기사항 활동 기록
 const createSubjectDetailedActivity = async (
-  subjectDetailedActivityCreateDTO: SubjectDetailedActivityCreateDTO
+  subjectDetailedActivityCreateDTO: SubjectDetailedActivityCreateDTO,
+  userId: number
 ) => {
   const data = await prisma.subject_Detailed_Ability_Activity.create({
     data: {
-      writerId: subjectDetailedActivityCreateDTO.userId,
       subjectName: subjectDetailedActivityCreateDTO.subjectName,
       subjectContent: subjectDetailedActivityCreateDTO.subjectContent,
       activitySemester: subjectDetailedActivityCreateDTO.activitySemester,
@@ -41,19 +42,20 @@ const createSubjectDetailedActivity = async (
       activityContentDetail:
         subjectDetailedActivityCreateDTO.activityContentDetail,
       subjectFurtherStudy: subjectDetailedActivityCreateDTO.subjectFurtherStudy,
+      writerId: userId,
     },
   });
   const activityId = data.activityId;
-  return { activityId };
+  return data;
 };
 
 // 수상경력 기록
 const createPrizeActivity = async (
-  prizeActivityCreateDTO: PrizeActivityCreateDTO
+  prizeActivityCreateDTO: PrizeActivityCreateDTO,
+  userId: number
 ) => {
   const data = await prisma.prize_Activity.create({
     data: {
-      writerId: prizeActivityCreateDTO.userId,
       name: prizeActivityCreateDTO.name,
       prize: prizeActivityCreateDTO.prize,
       date: prizeActivityCreateDTO.date,
@@ -61,19 +63,20 @@ const createPrizeActivity = async (
       prizeImage: prizeActivityCreateDTO.prizeImage,
       role: prizeActivityCreateDTO.role,
       thoughts: prizeActivityCreateDTO.thoughts,
+      writerId: userId,
     },
   });
   const activityId = data.activityId;
-  return { activityId };
+  return data;
 };
 
 // 독서활동 기록
 const createBookActivity = async (
-  bookActivityCreateDTO: BookActivityCreateDTO
+  bookActivityCreateDTO: BookActivityCreateDTO,
+  userId: number
 ) => {
   const data = await prisma.book_Activity.create({
     data: {
-      writerId: bookActivityCreateDTO.userId,
       titleAuthor: bookActivityCreateDTO.titleAuthor,
       startDate: bookActivityCreateDTO.startDate,
       endDate: bookActivityCreateDTO.endDate,
@@ -85,10 +88,11 @@ const createBookActivity = async (
       quote3: bookActivityCreateDTO.quote3,
       quote4: bookActivityCreateDTO.quote4,
       quote5: bookActivityCreateDTO.quote5,
+      writerId: userId,
     },
   });
   const activityId = data.activityId;
-  return { activityId };
+  return data;
 };
 const activityService = {
   createCreativeActivity,

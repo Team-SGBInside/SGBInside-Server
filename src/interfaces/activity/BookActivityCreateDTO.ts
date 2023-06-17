@@ -1,5 +1,4 @@
 export interface BookActivityCreateDTO {
-  userId: number;
   titleAuthor: string;
   startDate: string;
   endDate: string;
