@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { activityController } from "../controller";
-import auth from "../middlewares/auth";
+import { auth, upload } from "../middlewares";
 import { body } from "express-validator";
 
 const router: Router = Router();
@@ -41,6 +41,8 @@ router.post(
   ],
   activityController.createPrizeActivity
 );
+
+router.post("/image", upload.single("file"), activityController.createImage);
 
 router.post(
   "/book",

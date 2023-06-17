@@ -95,6 +95,23 @@ const createPrizeActivity = async (req: Request, res: Response) => {
   }
 };
 
+const createImage = async (req: Request, res: Response) => {
+  const image: Express.MulterS3.File = req.file as Express.MulterS3.File;
+  const { location } = image;
+
+  if (!location) {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NO_IMAGE));
+  }
+
+  const data = await activityService.createImage(location);
+
+  if (!data) {
+    return res
+      .status(sc.BAD_REQUEST)
+      .send(fail(sc.BAD_REQUEST, rm.CREATE_IMAGE_FAIL));
+  }
+};
+
 const createBookActivity = async (req: Request, res: Response) => {
   const error = validationResult(req);
   if (!error.isEmpty()) {
@@ -127,6 +144,7 @@ const activityController = {
   createCreativeActivity,
   createSubjectDetailedActivity,
   createPrizeActivity,
+  createImage,
   createBookActivity,
 };
 

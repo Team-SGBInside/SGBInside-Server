@@ -84,3 +84,8 @@ model Activity {
   writerId   Int
   User       User @relation(fields: [activityId], references: [userId], onDelete: Cascade, map: "writerId")
 }
+
+model Image {
+  id    Int     @id @unique @default(autoincrement())
+  image String? @db.VarChar(200)
+}
