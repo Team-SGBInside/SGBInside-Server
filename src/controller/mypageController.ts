@@ -14,7 +14,7 @@ const sortType = {
 
 const getMypage = async (req: Request, res: Response) => {
   const sort = req.query.sort as string;
-  const userId = req.body.userId;
+  const userId = req.user.userId;
 
   if (!userId || !sort) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
@@ -48,11 +48,13 @@ const getMypage = async (req: Request, res: Response) => {
 
     const data = {
       userId: accountInfo?.userId,
+      loginId: accountInfo?.loginId,
       name: accountInfo?.name,
       school: accountInfo?.school,
       grade: accountInfo?.grade,
       age: accountInfo?.age,
       // activityCount: activityCount,
+      isTeen: accountInfo?.isTeen,
       totalActivity: totalActivity,
     };
     return res

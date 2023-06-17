@@ -1,5 +1,4 @@
 export interface PrizeActivityCreateDTO {
-  userId: number;
   name: string;
   prize: string;
   date: string;

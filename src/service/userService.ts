@@ -49,9 +49,20 @@ const signIn = async (userSignInDTO: UserSignInDTO) => {
   }
 };
 
+// 유저 조회
+const getUserById = async (userId: number) => {
+  const foundUser = await prisma.user.findUnique({
+    where: {
+      userId,
+    },
+  });
+  return foundUser;
+};
+
 const userService = {
   createUser,
   signIn,
+  getUserById,
 };
 
 export default userService;
