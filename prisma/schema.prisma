@@ -29,6 +29,7 @@ model User {
   grade                             String                              @db.VarChar(20)
   age                               String                              @db.VarChar(20)
   isTeen                            Boolean
+  Activity                          Activity?
   Book_Activity                     Book_Activity[]
   Creative_Activity                 Creative_Activity[]
   Prize_Activity                    Prize_Activity[]
@@ -65,7 +66,6 @@ model Prize_Activity {
 model Book_Activity {
   activityId     Int     @id(map: "Reading_Activity_pkey") @default(autoincrement())
   titleAuthor    String  @db.VarChar(30)
-  startDate      String  @db.VarChar(30)
   endDate        String  @db.VarChar(30)
   semester       String? @db.VarChar(10)
   thoughts       String? @db.VarChar(300)
@@ -77,4 +77,10 @@ model Book_Activity {
   quote5         String? @db.VarChar(100)
   writerId       Int
   User           User    @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
+}
+
+model Activity {
+  activityId Int  @id @unique @default(autoincrement())
+  writerId   Int
+  User       User @relation(fields: [activityId], references: [userId], onDelete: Cascade, map: "writerId")
 }
