@@ -60,6 +60,7 @@ model Prize_Activity {
   role       String  @db.VarChar(300)
   thoughts   String? @db.VarChar(300)
   writerId   Int
+  type       String  @db.VarChar(30)
   User       User    @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
 }
 
@@ -83,4 +84,9 @@ model Activity {
   activityId Int  @id @unique @default(autoincrement())
   writerId   Int
   User       User @relation(fields: [activityId], references: [userId], onDelete: Cascade, map: "writerId")
+}
+
+model Image {
+  id    Int     @id @unique @default(autoincrement())
+  image String? @db.VarChar(200)
 }

@@ -64,6 +64,7 @@ const createPrizeActivity = async (
       role: prizeActivityCreateDTO.role,
       thoughts: prizeActivityCreateDTO.thoughts,
       writerId: userId,
+      type: prizeActivityCreateDTO.type,
     },
   });
   const activityId = data.activityId;
