@@ -103,12 +103,21 @@ const createImage = async (req: Request, res: Response) => {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NO_IMAGE));
   }
 
-  const data = await activityService.createImage(location);
-
-  if (!data) {
+  try {
+    const data = await activityService.createImage(location);
+    if (!data) {
+      return res
+        .status(sc.BAD_REQUEST)
+        .send(fail(sc.BAD_REQUEST, rm.CREATE_IMAGE_FAIL));
+    }
     return res
-      .status(sc.BAD_REQUEST)
-      .send(fail(sc.BAD_REQUEST, rm.CREATE_IMAGE_FAIL));
+      .status(sc.OK)
+      .send(success(sc.OK, rm.CREATE_IMAGE_SUCCESS, data));
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(sc.INTERNAL_SERVER_ERROR)
+      .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
   }
 };
 
