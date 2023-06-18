@@ -40,4 +40,9 @@ export default {
 
   // 마이페이지
   GET_ACCOUNT_INFO_SUCCESS: "마이페이지 계정 정보 조회 성공",
+
+  // 이미지
+  NO_IMAGE: "이미지가 없습니다.",
+  CREATE_IMAGE_SUCCESS: "이미지 저장 성공",
+  CREATE_IMAGE_FAIL: "이미지 저장 실패",
 };

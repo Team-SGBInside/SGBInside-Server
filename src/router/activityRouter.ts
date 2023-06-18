@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { activityController } from "../controller";
-import auth from "../middlewares/auth";
+import { auth, upload } from "../middlewares";
 import { body } from "express-validator";
 
 const router: Router = Router();
@@ -33,6 +33,7 @@ router.post(
 
 router.post(
   "/prize",
+  upload.single("file"),
   [
     body("name").trim().notEmpty(),
     body("date").trim().notEmpty(),

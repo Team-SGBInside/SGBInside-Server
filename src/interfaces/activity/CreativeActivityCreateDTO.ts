@@ -6,4 +6,5 @@ export interface CreativeActivityCreateDTO {
   semester: string;
   role: string;
   thoughts: string;
+  writerId: number;
 }

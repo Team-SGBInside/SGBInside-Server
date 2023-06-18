@@ -5,6 +5,6 @@ import { body } from "express-validator";
 
 const router: Router = Router();
 
-router.get("/", auth, mypageController.getMypage);
+router.get("/", mypageController.getMypage);
 
 export default router;
