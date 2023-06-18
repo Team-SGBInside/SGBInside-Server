@@ -3,6 +3,7 @@ import { CreativeActivityCreateDTO } from "./../interfaces/activity/CreativeActi
 import { SubjectDetailedActivityCreateDTO } from "./../interfaces/activity/SubjectDetailedActivityCreateDTO";
 import { PrismaClient } from "@prisma/client";
 import { BookActivityCreateDTO } from "../interfaces/activity/BookActivityCreateDTO";
+import { ImageCreateResponseDTO } from "../interfaces/activity/ImageCreateResponseDTO";
 const prisma = new PrismaClient();
 
 // 창의적 체험활동 기록
@@ -52,6 +53,7 @@ const createSubjectDetailedActivity = async (
 // 수상경력 기록
 const createPrizeActivity = async (
   prizeActivityCreateDTO: PrizeActivityCreateDTO,
+  location: string,
   userId: number
 ) => {
   const data = await prisma.prize_Activity.create({
@@ -60,7 +62,7 @@ const createPrizeActivity = async (
       prize: prizeActivityCreateDTO.prize,
       date: prizeActivityCreateDTO.date,
       semester: prizeActivityCreateDTO.semester,
-      prizeImage: prizeActivityCreateDTO.prizeImage,
+      prizeImage: location,
       role: prizeActivityCreateDTO.role,
       thoughts: prizeActivityCreateDTO.thoughts,
       writerId: userId,
