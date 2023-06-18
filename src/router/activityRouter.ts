@@ -33,6 +33,7 @@ router.post(
 
 router.post(
   "/prize",
+  upload.single("file"),
   [
     body("name").trim().notEmpty(),
     body("date").trim().notEmpty(),
@@ -42,7 +43,7 @@ router.post(
   activityController.createPrizeActivity
 );
 
-router.post("/image", upload.single("file"), activityController.createImage);
+//router.post("/image", upload.single("file"), activityController.createImage);
 
 router.post(
   "/book",

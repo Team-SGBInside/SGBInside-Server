@@ -53,6 +53,7 @@ const createSubjectDetailedActivity = async (
 // 수상경력 기록
 const createPrizeActivity = async (
   prizeActivityCreateDTO: PrizeActivityCreateDTO,
+  location: string,
   userId: number
 ) => {
   const data = await prisma.prize_Activity.create({
@@ -61,7 +62,7 @@ const createPrizeActivity = async (
       prize: prizeActivityCreateDTO.prize,
       date: prizeActivityCreateDTO.date,
       semester: prizeActivityCreateDTO.semester,
-      prizeImage: prizeActivityCreateDTO.prizeImage,
+      prizeImage: location,
       role: prizeActivityCreateDTO.role,
       thoughts: prizeActivityCreateDTO.thoughts,
       writerId: userId,
@@ -70,21 +71,6 @@ const createPrizeActivity = async (
   });
   const activityId = data.activityId;
   return data;
-};
-
-const createImage = async (location: string) => {
-  const data = await prisma.image.create({
-    data: {
-      image: location,
-    },
-  });
-  console.log(location);
-
-  const result: ImageCreateResponseDTO = {
-    id: data.id,
-    image: data.image as string,
-  };
-  return result;
 };
 
 // 독서활동 기록
@@ -114,7 +100,6 @@ const activityService = {
   createCreativeActivity,
   createSubjectDetailedActivity,
   createPrizeActivity,
-  createImage,
   createBookActivity,
 };
 

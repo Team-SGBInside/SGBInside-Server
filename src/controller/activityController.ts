@@ -73,6 +73,8 @@ const createPrizeActivity = async (req: Request, res: Response) => {
   }
 
   const userId = req.user.userId;
+  const image: Express.MulterS3.File = req.file as Express.MulterS3.File;
+  const { location } = image;
 
   if (!userId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
@@ -82,6 +84,7 @@ const createPrizeActivity = async (req: Request, res: Response) => {
     const prizeActivityCreateDTO: PrizeActivityCreateDTO = req.body;
     const data = await activityService.createPrizeActivity(
       prizeActivityCreateDTO,
+      location,
       userId
     );
 
@@ -89,32 +92,6 @@ const createPrizeActivity = async (req: Request, res: Response) => {
       .status(sc.OK)
       .send(success(sc.OK, rm.CREATE_PRIZE_ACTIVITY_SUCCESS, data));
   } catch (error) {
-    return res
-      .status(sc.INTERNAL_SERVER_ERROR)
-      .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
-  }
-};
-
-const createImage = async (req: Request, res: Response) => {
-  const image: Express.MulterS3.File = req.file as Express.MulterS3.File;
-  const { location } = image;
-
-  if (!location) {
-    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NO_IMAGE));
-  }
-
-  try {
-    const data = await activityService.createImage(location);
-    if (!data) {
-      return res
-        .status(sc.BAD_REQUEST)
-        .send(fail(sc.BAD_REQUEST, rm.CREATE_IMAGE_FAIL));
-    }
-    return res
-      .status(sc.OK)
-      .send(success(sc.OK, rm.CREATE_IMAGE_SUCCESS, data));
-  } catch (error) {
-    console.log(error);
     return res
       .status(sc.INTERNAL_SERVER_ERROR)
       .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
@@ -153,7 +130,6 @@ const activityController = {
   createCreativeActivity,
   createSubjectDetailedActivity,
   createPrizeActivity,
-  createImage,
   createBookActivity,
 };
 
