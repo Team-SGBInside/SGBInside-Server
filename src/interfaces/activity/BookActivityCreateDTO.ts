@@ -9,4 +9,5 @@ export interface BookActivityCreateDTO {
   quote3: string;
   quote4: string;
   quote5: string;
+  writerId: number;
 }

@@ -7,4 +7,5 @@ export interface SubjectDetailedActivityCreateDTO {
   mainActivity: string;
   activityContentDetail: string;
   subjectFurtherStudy: string;
+  writerId: number;
 }

@@ -43,8 +43,6 @@ router.post(
   activityController.createPrizeActivity
 );
 
-//router.post("/image", upload.single("file"), activityController.createImage);
-
 router.post(
   "/book",
   [

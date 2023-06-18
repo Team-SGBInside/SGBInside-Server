@@ -15,21 +15,22 @@ const createCreativeActivity = async (req: Request, res: Response) => {
   }
 
   const creativeActivityCreateDTO: CreativeActivityCreateDTO = req.body;
-  const userId = req.user.userId;
-  if (!userId) {
+  const writerId = req.body.writerId;
+  // const userId = req.user.userId;
+  if (!writerId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
   try {
     const data = await activityService.createCreativeActivity(
-      creativeActivityCreateDTO,
-      userId
+      creativeActivityCreateDTO
     );
 
     return res
       .status(sc.OK)
       .send(success(sc.OK, rm.CREATE_CREATIVE_ACTIVITY_SUCCESS, data));
   } catch (error) {
+    console.log(error);
     return res
       .status(sc.INTERNAL_SERVER_ERROR)
       .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
@@ -42,24 +43,26 @@ const createSubjectDetailedActivity = async (req: Request, res: Response) => {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
-  const userId = req.user.userId;
-
-  if (!userId) {
+  // if (!userId) {
+  //   return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  // }
+  const subjectDetailedActivityCreateDTO: SubjectDetailedActivityCreateDTO =
+    req.body;
+  const writerId = req.body.writerId;
+  if (!writerId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
   try {
-    const subjectDetailedActivityCreateDTO: SubjectDetailedActivityCreateDTO =
-      req.body;
     const data = await activityService.createSubjectDetailedActivity(
-      subjectDetailedActivityCreateDTO,
-      userId
+      subjectDetailedActivityCreateDTO
     );
 
     return res
       .status(sc.OK)
       .send(success(sc.OK, rm.CREATE_SUBJECT_DETAILED_ACTIVITY_SUCCESS, data));
   } catch (error) {
+    console.log(error);
     return res
       .status(sc.INTERNAL_SERVER_ERROR)
       .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
@@ -71,27 +74,32 @@ const createPrizeActivity = async (req: Request, res: Response) => {
   if (!error.isEmpty()) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
+  const prizeActivityCreateDTO: PrizeActivityCreateDTO = req.body;
+  const writerId = req.body.writerId;
+  console.log(writerId, typeof writerId);
+  //const userId = req.user.userId;
+  // if (!writerId) {
+  //   return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  // }
 
-  const userId = req.user.userId;
   const image: Express.MulterS3.File = req.file as Express.MulterS3.File;
   const { location } = image;
 
-  if (!userId) {
-    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
-  }
+  // if (!userId) {
+  //   return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  // }
 
   try {
-    const prizeActivityCreateDTO: PrizeActivityCreateDTO = req.body;
     const data = await activityService.createPrizeActivity(
       prizeActivityCreateDTO,
-      location,
-      userId
+      location
     );
 
     return res
       .status(sc.OK)
       .send(success(sc.OK, rm.CREATE_PRIZE_ACTIVITY_SUCCESS, data));
   } catch (error) {
+    console.log(error);
     return res
       .status(sc.INTERNAL_SERVER_ERROR)
       .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
@@ -103,23 +111,27 @@ const createBookActivity = async (req: Request, res: Response) => {
   if (!error.isEmpty()) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
-
-  const userId = req.user.userId;
-
-  if (!userId) {
+  const bookActivityCreateDTO: BookActivityCreateDTO = req.body;
+  const writerId = req.body.writerId;
+  if (!writerId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
+  // const userId = req.user.userId;
+
+  // if (!userId) {
+  //   return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  // }
+
   try {
-    const bookActivityCreateDTO: BookActivityCreateDTO = req.body;
     const data = await activityService.createBookActivity(
-      bookActivityCreateDTO,
-      userId
+      bookActivityCreateDTO
     );
     return res
       .status(sc.OK)
       .send(success(sc.OK, rm.CREATE_BOOK_ACTIVITY_SUCCESS, data));
   } catch (error) {
+    console.log(error);
     return res
       .status(sc.INTERNAL_SERVER_ERROR)
       .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
