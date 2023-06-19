@@ -81,7 +81,8 @@ model Book_Activity {
 }
 
 model Activity {
-  activityId Int  @id @unique @default(autoincrement())
+  activityId Int     @id @unique @default(autoincrement())
   writerId   Int
-  User       User @relation(fields: [activityId], references: [userId], onDelete: Cascade, map: "writerId")
+  semester   String? @db.VarChar(10)
+  User       User    @relation(fields: [activityId], references: [userId], onDelete: Cascade, map: "writerId")
 }

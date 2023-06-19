@@ -12,11 +12,22 @@ const sortType = {
   BOOK: "book",
 };
 
+const semesterType = {
+  ALL: "all",
+  FIRST: "1-1",
+  SECOND: "1-2",
+  THIRD: "2-1",
+  FOURTH: "2-2",
+  FIFTH: "3-1",
+  SIXTH: "3-2",
+};
+
 const getMypage = async (req: Request, res: Response) => {
   const sort = req.query.sort as string;
-  const userId = req.user.userId;
+  const semester = req.query.semester as string;
+  const writerId = req.body.writerId;
 
-  if (!userId || !sort) {
+  if (!writerId || !sort || !semester) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
@@ -25,7 +36,14 @@ const getMypage = async (req: Request, res: Response) => {
     sort !== sortType.CREATIVE &&
     sort !== sortType.SUBJECT &&
     sort !== sortType.PRIZE &&
-    sort !== sortType.BOOK
+    sort !== sortType.BOOK &&
+    semester !== semesterType.ALL &&
+    semester !== semesterType.FIRST &&
+    semester !== semesterType.SECOND &&
+    semester !== semesterType.THIRD &&
+    semester !== semesterType.FOURTH &&
+    semester !== semesterType.FIFTH &&
+    semester !== semesterType.SIXTH
   ) {
     return res
       .status(sc.BAD_REQUEST)
@@ -33,18 +51,12 @@ const getMypage = async (req: Request, res: Response) => {
   }
 
   try {
-    const accountInfo = await mypageService.getAccountInfoByUserId(userId);
-    //const allActivity = await mypageService.getActivityByUserId(+userId);
+    const accountInfo = await mypageService.getAccountInfoByUserId(writerId);
     const totalActivity = await mypageService.getTotalActivityByUserId(
-      userId,
-      sort
+      writerId,
+      sort,
+      semester
     );
-
-    // const activityCount =
-    //   totalActivity.allcreativeActivity.length +
-    //   totalActivity.allSubjectDetailedActivity.length +
-    //   totalActivity.allPrizeActivity.length +
-    //   totalActivity.allBookActivity.length;
 
     const data = {
       userId: accountInfo?.userId,
@@ -53,7 +65,6 @@ const getMypage = async (req: Request, res: Response) => {
       school: accountInfo?.school,
       grade: accountInfo?.grade,
       age: accountInfo?.age,
-      // activityCount: activityCount,
       isTeen: accountInfo?.isTeen,
       totalActivity: totalActivity,
     };
