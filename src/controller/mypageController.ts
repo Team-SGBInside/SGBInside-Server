@@ -22,6 +22,7 @@ const semesterType = {
   SIXTH: "3-2",
 };
 
+// 마이페이지 전체 조회
 const getMypage = async (req: Request, res: Response) => {
   const sort = req.query.sort as string;
   const semester = req.query.semester as string;
@@ -79,8 +80,169 @@ const getMypage = async (req: Request, res: Response) => {
   }
 };
 
+// 마이페이지 개별 활동 조회 - 창체
+const getCreativeActivity = async (req: Request, res: Response) => {
+  const { activityId } = req.params;
+
+  if (!activityId) {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  }
+
+  try {
+    const foundActivity = await mypageService.getCreativeActivity(+activityId);
+    return res
+      .status(sc.OK)
+      .send(success(sc.OK, rm.GET_SINGLE_ACTIVITY_SUCCESS, foundActivity));
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(sc.INTERNAL_SERVER_ERROR)
+      .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+  }
+};
+
+// // 마이페이지 개별 활동 삭제 - 창체
+// const deleteCreativeActivity = async (req: Request, res: Response) => {
+//   const { activityId } = req.params;
+
+//   if (!activityId) {
+//     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+//   }
+
+//   try {
+//     const deletedActivity = await mypageService.deleteCreativeActivity(
+//       +activityId
+//     );
+//     const data = {
+//       deletedActivity: {
+//         activityId: deletedActivity.activityId,
+//         name: deletedActivity.name,
+//         activityType: deletedActivity.activityType,
+//         startDate: deletedActivity.startDate,
+//         endDate: deletedActivity.endDate,
+//         semester: deletedActivity.semester,
+//         role: deletedActivity.role,
+//         thoughts: deletedActivity.thoughts,
+//         writerId: deletedActivity.writerId,
+//       },
+//     };
+//     return res
+//       .status(sc.OK)
+//       .send(success(sc.OK, rm.DELETE_SINGLE_ACTIVITY_SUCCESS, data));
+//   } catch (error) {
+//     console.log(error);
+//     return res
+//       .status(sc.INTERNAL_SERVER_ERROR)
+//       .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+//   }
+// };
+
+// 마이페이지 개별 활동 조회 - 세특
+const getSubjectActivity = async (req: Request, res: Response) => {
+  const { activityId } = req.params;
+
+  if (!activityId) {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  }
+
+  try {
+    const foundActivity = await mypageService.getSubjectActivity(+activityId);
+    return res
+      .status(sc.OK)
+      .send(success(sc.OK, rm.GET_SINGLE_ACTIVITY_SUCCESS, foundActivity));
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(sc.INTERNAL_SERVER_ERROR)
+      .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+  }
+};
+
+// 마이페이지 개별 활동 삭제 - 세특
+// const deleteSubjectActivity = async (req: Request, res: Response) => {
+//   const { activityId } = req.params;
+
+//   if (!activityId) {
+//     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+//   }
+
+//   try {
+//     const deletedActivity = await mypageService.deleteSubjectActivity(
+//       +activityId
+//     );
+//     const data = {
+//       deletedActivity: {
+//         activityId: deletedActivity.activityId,
+//         name: deletedActivity.name,
+//         activityType: deletedActivity.activityType,
+//         startDate: deletedActivity.startDate,
+//         endDate: deletedActivity.endDate,
+//         semester: deletedActivity.semester,
+//         role: deletedActivity.role,
+//         thoughts: deletedActivity.thoughts,
+//         writerId: deletedActivity.writerId,
+//       },
+//     };
+//     return res
+//       .status(sc.OK)
+//       .send(success(sc.OK, rm.DELETE_SINGLE_ACTIVITY_SUCCESS, data));
+//   } catch (error) {
+//     console.log(error);
+//     return res
+//       .status(sc.INTERNAL_SERVER_ERROR)
+//       .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+//   }
+// };
+
+// 마이페이지 개별 활동 조회 - 독서
+const getBookActivity = async (req: Request, res: Response) => {
+  const { activityId } = req.params;
+
+  if (!activityId) {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  }
+
+  try {
+    const foundActivity = await mypageService.getBookActivity(+activityId);
+    return res
+      .status(sc.OK)
+      .send(success(sc.OK, rm.GET_SINGLE_ACTIVITY_SUCCESS, foundActivity));
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(sc.INTERNAL_SERVER_ERROR)
+      .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+  }
+};
+
+// 마이페이지 개별 활동 조회 - 수상
+const getPrizeActivity = async (req: Request, res: Response) => {
+  const { activityId } = req.params;
+
+  if (!activityId) {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  }
+
+  try {
+    const foundActivity = await mypageService.getPrizeActivity(+activityId);
+    return res
+      .status(sc.OK)
+      .send(success(sc.OK, rm.GET_SINGLE_ACTIVITY_SUCCESS, foundActivity));
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(sc.INTERNAL_SERVER_ERROR)
+      .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+  }
+};
+
 const mypageController = {
   getMypage,
+  getCreativeActivity,
+  getSubjectActivity,
+  getBookActivity,
+  getPrizeActivity,
+  //deleteCreativeActivity,
 };
 
 export default mypageController;

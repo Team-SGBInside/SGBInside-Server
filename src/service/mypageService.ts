@@ -162,9 +162,64 @@ const getTotalActivityByUserId = async (
   return data;
 };
 
+// 개별 활동 조회 - 창체
+const getCreativeActivity = async (activityId: number) => {
+  const data = await prisma.creative_Activity.findUnique({
+    where: {
+      activityId: activityId,
+    },
+  });
+  return data;
+};
+
+// // 개별 활동 삭제 - 창체
+// const deleteCreativeActivity = async (activityId: number) => {
+//   const data = await prisma.creative_Activity.delete({
+//     where: {
+//       activityId: activityId,
+//     },
+//   });
+//   return data;
+// };
+
+// 개별 활동 조회 - 세특
+const getSubjectActivity = async (activityId: number) => {
+  const data = await prisma.subject_Detailed_Ability_Activity.findUnique({
+    where: {
+      activityId: activityId,
+    },
+  });
+  return data;
+};
+
+// 개별 활동 조회 - 독서
+const getBookActivity = async (activityId: number) => {
+  const data = await prisma.book_Activity.findUnique({
+    where: {
+      activityId: activityId,
+    },
+  });
+  return data;
+};
+
+// 개별 활동 조회 - 수상
+const getPrizeActivity = async (activityId: number) => {
+  const data = await prisma.prize_Activity.findUnique({
+    where: {
+      activityId: activityId,
+    },
+  });
+  return data;
+};
+
 const mypageService = {
   getAccountInfoByUserId,
   getTotalActivityByUserId,
+  getCreativeActivity,
+  //deleteCreativeActivity,
+  getSubjectActivity,
+  getBookActivity,
+  getPrizeActivity,
 };
 
 export default mypageService;
