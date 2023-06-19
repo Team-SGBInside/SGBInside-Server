@@ -6,6 +6,5 @@ export interface PrizeActivityCreateDTO {
   prizeImage: string;
   role: string;
   thoughts: string;
-  writerId: number;
   type: string;
 }
