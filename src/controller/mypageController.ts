@@ -8,11 +8,6 @@ import { SubjectDetailedActivityCreateDTO } from "../interfaces/activity/Subject
 import { BookActivityCreateDTO } from "../interfaces/activity/BookActivityCreateDTO";
 import { PrizeActivityCreateDTO } from "../interfaces/activity/PrizeActivityCreateDTO";
 
-// // 마이페이지 계정정보 조회
-// const getAccountInfo = async (req: Request, res: Response) => {
-//   try {
-//   } catch (error) {}
-// };
 const sortType = {
   ALL: "all",
   CREATIVE: "creative",
@@ -33,9 +28,9 @@ const semesterType = {
 
 // 마이페이지 전체 조회
 const getMypage = async (req: Request, res: Response) => {
+  const { writerId } = req.params;
   const sort = req.query.sort as string;
   const semester = req.query.semester as string;
-  const writerId = req.body.writerId;
 
   if (!writerId || !sort || !semester) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
@@ -61,9 +56,9 @@ const getMypage = async (req: Request, res: Response) => {
   }
 
   try {
-    const accountInfo = await mypageService.getAccountInfoByUserId(writerId);
+    const accountInfo = await mypageService.getAccountInfoByUserId(+writerId);
     const totalActivity = await mypageService.getTotalActivityByUserId(
-      writerId,
+      +writerId,
       sort,
       semester
     );
