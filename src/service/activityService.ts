@@ -50,7 +50,7 @@ const createSubjectDetailedActivity = async (
 // 수상경력 기록
 const createPrizeActivity = async (
   prizeActivityCreateDTO: PrizeActivityCreateDTO,
-  location: string,
+  //location: string,
   writerId: number
 ) => {
   const data = await prisma.prize_Activity.create({
@@ -59,7 +59,8 @@ const createPrizeActivity = async (
       prize: prizeActivityCreateDTO.prize,
       date: prizeActivityCreateDTO.date,
       semester: prizeActivityCreateDTO.semester,
-      prizeImage: location,
+      // prizeImage: location,
+      prizeImage: prizeActivityCreateDTO.prizeImage,
       role: prizeActivityCreateDTO.role,
       thoughts: prizeActivityCreateDTO.thoughts,
       writerId: writerId,
