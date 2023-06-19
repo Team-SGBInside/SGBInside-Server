@@ -172,16 +172,6 @@ const getCreativeActivity = async (activityId: number) => {
   return data;
 };
 
-// // 개별 활동 삭제 - 창체
-// const deleteCreativeActivity = async (activityId: number) => {
-//   const data = await prisma.creative_Activity.delete({
-//     where: {
-//       activityId: activityId,
-//     },
-//   });
-//   return data;
-// };
-
 // 개별 활동 조회 - 세특
 const getSubjectActivity = async (activityId: number) => {
   const data = await prisma.subject_Detailed_Ability_Activity.findUnique({
@@ -212,14 +202,56 @@ const getPrizeActivity = async (activityId: number) => {
   return data;
 };
 
+// 개별 활동 삭제 - 창체
+const deleteCreativeActivity = async (activityId: number) => {
+  const data = await prisma.creative_Activity.delete({
+    where: {
+      activityId: activityId,
+    },
+  });
+  return data;
+};
+
+// 개별 활동 삭제 - 세특
+const deleteSubjectActivity = async (activityId: number) => {
+  const data = await prisma.subject_Detailed_Ability_Activity.delete({
+    where: {
+      activityId: activityId,
+    },
+  });
+  return data;
+};
+
+// 개별 활동 삭제 - 독서
+const deleteBookActivity = async (activityId: number) => {
+  const data = await prisma.book_Activity.delete({
+    where: {
+      activityId: activityId,
+    },
+  });
+  return data;
+};
+// 개별 활동 삭제 - 삭제
+const deletePrizeActivity = async (activityId: number) => {
+  const data = await prisma.prize_Activity.delete({
+    where: {
+      activityId: activityId,
+    },
+  });
+  return data;
+};
+
 const mypageService = {
   getAccountInfoByUserId,
   getTotalActivityByUserId,
   getCreativeActivity,
-  //deleteCreativeActivity,
   getSubjectActivity,
   getBookActivity,
   getPrizeActivity,
+  deleteCreativeActivity,
+  deleteSubjectActivity,
+  deleteBookActivity,
+  deletePrizeActivity,
 };
 
 export default mypageService;

@@ -15,6 +15,9 @@ router.get("/book/:activityId", mypageController.getBookActivity);
 router.get("/prize/:activityId", mypageController.getPrizeActivity);
 
 // 마이페이지 개별 활동 삭제
-// router.delete("/creative/:activityId", mypageController.deleteCreativeActivity);
+router.delete("/creative/:activityId", mypageController.deleteCreativeActivity);
+router.delete("/subject/:activityId", mypageController.deleteSubjectActivity);
+router.delete("/book/:activityId", mypageController.deleteBookActivity);
+router.delete("/prize/:activityId", mypageController.deletePrizeActivity);
 
 export default router;
