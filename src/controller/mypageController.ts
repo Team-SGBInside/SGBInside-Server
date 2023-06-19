@@ -8,6 +8,11 @@ import { SubjectDetailedActivityCreateDTO } from "../interfaces/activity/Subject
 import { BookActivityCreateDTO } from "../interfaces/activity/BookActivityCreateDTO";
 import { PrizeActivityCreateDTO } from "../interfaces/activity/PrizeActivityCreateDTO";
 
+// // 마이페이지 계정정보 조회
+// const getAccountInfo = async (req: Request, res: Response) => {
+//   try {
+//   } catch (error) {}
+// };
 const sortType = {
   ALL: "all",
   CREATIVE: "creative",
@@ -386,6 +391,7 @@ const deletePrizeActivity = async (req: Request, res: Response) => {
 
 const mypageController = {
   getMypage,
+  // getAccountInfo,
   getCreativeActivity,
   getSubjectActivity,
   getBookActivity,

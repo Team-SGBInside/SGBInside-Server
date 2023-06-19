@@ -5,8 +5,11 @@ import { body } from "express-validator";
 
 const router: Router = Router();
 
-// 마이페이지 전체 조회
+// 마이페이지 전체 활동 조회
 router.get("/", mypageController.getMypage);
+
+// 마이페이지 계정정보 조회
+// router.get("/my", mypageController.getAccountInfo);
 
 // 마이페이지 개별 활동 조회
 router.get("/creative/:activityId", mypageController.getCreativeActivity);
