@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+// 계정정보 조회
 const getAccountInfoByUserId = async (writerId: number) => {
   const accountInfo = await prisma.user.findUnique({
     where: {
@@ -12,11 +13,13 @@ const getAccountInfoByUserId = async (writerId: number) => {
   return accountInfo;
 };
 
+// 전체 활동 조회 api - GET ~/mypage?sort=value&semester=value
 const getTotalActivityByUserId = async (
   writerId: number,
   sort: string,
   semester: string
 ) => {
+  // 유형별 전체 활동 조회
   if (sort !== "all") {
     switch (sort) {
       case "creative":
@@ -27,7 +30,6 @@ const getTotalActivityByUserId = async (
               semester: semester,
             },
           });
-          console.log("here1");
           return allcreativeActivity;
         }
 
@@ -37,7 +39,6 @@ const getTotalActivityByUserId = async (
               writerId: writerId,
             },
           });
-          console.log("here2");
           return allcreativeActivity;
         }
 
@@ -50,7 +51,6 @@ const getTotalActivityByUserId = async (
                 activitySemester: semester,
               },
             });
-          console.log("here3");
           return allSubjectDetailedActivity;
         }
 
@@ -61,7 +61,6 @@ const getTotalActivityByUserId = async (
                 writerId: writerId,
               },
             });
-          console.log("here4");
 
           return allSubjectDetailedActivity;
         }
@@ -74,7 +73,6 @@ const getTotalActivityByUserId = async (
               semester: semester,
             },
           });
-          console.log("here5");
 
           return allPrizeActivity;
         }
@@ -85,7 +83,6 @@ const getTotalActivityByUserId = async (
               writerId: writerId,
             },
           });
-          console.log("here6");
 
           return allPrizeActivity;
         }
@@ -98,7 +95,6 @@ const getTotalActivityByUserId = async (
               semester: semester,
             },
           });
-          console.log("here7");
 
           return allBookActivity;
         }
@@ -109,12 +105,85 @@ const getTotalActivityByUserId = async (
               writerId: writerId,
             },
           });
-          console.log("here8");
 
           return allBookActivity;
         }
     }
   }
+
+  // 유형 구분 없이 전체 활동 조회
+  // if (sort === "all") {
+  //   switch (semester) {
+  //     case "1-1":
+  //       const allcreativeActivity = await prisma.creative_Activity.findMany({
+  //         where: {
+  //           writerId: writerId,
+  //           semester: "1-1",
+  //         },
+  //       });
+  //       const allSubjectActivity =
+  //         await prisma.subject_Detailed_Ability_Activity.findMany({
+  //           where: {
+  //             writerId: writerId,
+  //             activitySemester: "1-1",
+  //           },
+  //         });
+  //       const allBookActivity = await prisma.book_Activity.findMany({
+  //         where: {
+  //           writerId: writerId,
+  //           semester: "1-1",
+  //         },
+  //       });
+  //       const allPrizeActivity = await prisma.prize_Activity.findMany({
+  //         where: {
+  //           writerId: writerId,
+  //           semester: "1-1",
+  //         },
+  //       });
+  //       return {
+  //         allcreativeActivity,
+  //         allSubjectActivity,
+  //         allBookActivity,
+  //         allPrizeActivity,
+  //       };
+  //     case "1-2":
+  //       const allcreativeActivity = await prisma.creative_Activity.findMany({
+  //         where: {
+  //           writerId: writerId,
+  //           semester: "1-2",
+  //         },
+  //       });
+  //       const allSubjectActivity =
+  //         await prisma.subject_Detailed_Ability_Activity.findMany({
+  //           where: {
+  //             writerId: writerId,
+  //             activitySemester: "1-2",
+  //           },
+  //         });
+  //       const allBookActivity = await prisma.book_Activity.findMany({
+  //         where: {
+  //           writerId: writerId,
+  //           semester: "1-2",
+  //         },
+  //       });
+  //       const allPrizeActivity = await prisma.prize_Activity.findMany({
+  //         where: {
+  //           writerId: writerId,
+  //           semester: "1-2",
+  //         },
+  //       });
+  //       return {
+  //         allcreativeActivity,
+  //         allSubjectActivity,
+  //         allBookActivity,
+  //         allPrizeActivity,
+  //       };
+  //     case "2-1":
+  //     case "2-2":
+  //     case "3-1":
+  //     case "3-2":
+  //   }
+  // }
 
   const allcreativeActivity = await prisma.creative_Activity.findMany({
     where: {

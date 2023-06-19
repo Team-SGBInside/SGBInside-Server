@@ -69,9 +69,7 @@ const getMypage = async (req: Request, res: Response) => {
       isTeen: accountInfo?.isTeen,
       totalActivity: totalActivity,
     };
-    return res
-      .status(sc.OK)
-      .send(success(sc.OK, rm.GET_ACCOUNT_INFO_SUCCESS, data));
+    return res.status(sc.OK).send(success(sc.OK, rm.GET_MYPAGE_SUCCESS, data));
   } catch (error) {
     console.log(error);
     return res
