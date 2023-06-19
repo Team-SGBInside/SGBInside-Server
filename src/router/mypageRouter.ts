@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { mypageController } from "../controller";
-import { auth } from "../middlewares";
+import { auth, upload } from "../middlewares";
 import { body } from "express-validator";
 
 const router: Router = Router();
@@ -20,10 +20,14 @@ router.delete("/subject/:activityId", mypageController.deleteSubjectActivity);
 router.delete("/book/:activityId", mypageController.deleteBookActivity);
 router.delete("/prize/:activityId", mypageController.deletePrizeActivity);
 
-// // 마이페이지 개별 활동 수정
-// router.update("/creative/:activityId", mypageController.updateCreativeActivity);
-// router.update("/subject/:activityId", mypageController.updateSubjectActivity);
-// router.update("/book/:activityId", mypageController.updateBookActivity);
-// router.update("/prize/:activityId", mypageController.updatePrizeActivity);
+// 마이페이지 개별 활동 수정
+router.post("/creative/:activityId", mypageController.updateCreativeActivity);
+router.post("/subject/:activityId", mypageController.updateSubjectActivity);
+router.post("/book/:activityId", mypageController.updateBookActivity);
+router.post(
+  "/prize/:activityId",
+  upload.single("file"),
+  mypageController.updatePrizeActivity
+);
 
 export default router;

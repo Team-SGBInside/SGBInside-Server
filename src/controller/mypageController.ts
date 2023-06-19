@@ -3,6 +3,10 @@ import { validationResult } from "express-validator";
 import { sc, rm } from "../constants";
 import { fail, success } from "../constants/response";
 import { mypageService } from "../service";
+import { CreativeActivityCreateDTO } from "../interfaces/activity/CreativeActivityCreateDTO";
+import { SubjectDetailedActivityCreateDTO } from "../interfaces/activity/SubjectDetailedActivityCreateDTO";
+import { BookActivityCreateDTO } from "../interfaces/activity/BookActivityCreateDTO";
+import { PrizeActivityCreateDTO } from "../interfaces/activity/PrizeActivityCreateDTO";
 
 const sortType = {
   ALL: "all",
@@ -162,6 +166,140 @@ const getPrizeActivity = async (req: Request, res: Response) => {
   }
 };
 
+// 마이페이지 개별 활동 수정 - 창체
+const updateCreativeActivity = async (req: Request, res: Response) => {
+  const creativeActivityCreateDTO: CreativeActivityCreateDTO = req.body;
+
+  const { activityId } = req.params;
+  const writerId = req.body.writerId;
+
+  if (!activityId) {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  }
+
+  if (writerId != null) {
+    return res
+      .status(sc.BAD_REQUEST)
+      .send(fail(sc.BAD_REQUEST, rm.BAD_REQUEST));
+  }
+
+  try {
+    const data = await mypageService.updateCreativeActivity(
+      +activityId,
+      creativeActivityCreateDTO
+    );
+    return res
+      .status(sc.OK)
+      .send(success(sc.OK, rm.UPDATE_SINGLE_ACTIVITY_SUCCESS, data));
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(sc.INTERNAL_SERVER_ERROR)
+      .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+  }
+};
+
+// 마이페이지 개별 활동 수정 - 세특
+const updateSubjectActivity = async (req: Request, res: Response) => {
+  const subjectActivityCreateDTO: SubjectDetailedActivityCreateDTO = req.body;
+  const writerId = req.body.writerId;
+  const { activityId } = req.params;
+
+  if (!activityId) {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  }
+
+  if (writerId != null) {
+    return res
+      .status(sc.BAD_REQUEST)
+      .send(fail(sc.BAD_REQUEST, rm.BAD_REQUEST));
+  }
+
+  try {
+    const data = await mypageService.updateSubjectActivity(
+      +activityId,
+      subjectActivityCreateDTO
+    );
+    return res
+      .status(sc.OK)
+      .send(success(sc.OK, rm.UPDATE_SINGLE_ACTIVITY_SUCCESS, data));
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(sc.INTERNAL_SERVER_ERROR)
+      .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+  }
+};
+
+// 마이페이지 개별 활동 수정 - 독서
+const updateBookActivity = async (req: Request, res: Response) => {
+  const bookActivityCreateDTO: BookActivityCreateDTO = req.body;
+  const writerId = req.body.writerId;
+  const { activityId } = req.params;
+
+  if (!activityId) {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  }
+
+  if (writerId != null) {
+    return res
+      .status(sc.BAD_REQUEST)
+      .send(fail(sc.BAD_REQUEST, rm.BAD_REQUEST));
+  }
+
+  try {
+    const data = await mypageService.updateBookActivity(
+      +activityId,
+      bookActivityCreateDTO
+    );
+    return res
+      .status(sc.OK)
+      .send(success(sc.OK, rm.UPDATE_SINGLE_ACTIVITY_SUCCESS, data));
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(sc.INTERNAL_SERVER_ERROR)
+      .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+  }
+};
+
+// 마이페이지 개별 활동 수정 - 수상
+const updatePrizeActivity = async (req: Request, res: Response) => {
+  const prizeActivityCreateDTO: PrizeActivityCreateDTO = req.body;
+
+  const image: Express.MulterS3.File = req.file as Express.MulterS3.File;
+  const { location } = image;
+  const { activityId } = req.params;
+
+  console.log(prizeActivityCreateDTO);
+  console.log(location);
+  if (!activityId) {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  }
+
+  // if (writerId !== null) {
+  //   return res
+  //     .status(sc.BAD_REQUEST)
+  //     .send(fail(sc.BAD_REQUEST, rm.BAD_REQUEST));
+  // }
+
+  try {
+    const data = await mypageService.updatePrizeActivity(
+      +activityId,
+      prizeActivityCreateDTO,
+      location
+    );
+    return res
+      .status(sc.OK)
+      .send(success(sc.OK, rm.UPDATE_SINGLE_ACTIVITY_SUCCESS, data));
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(sc.INTERNAL_SERVER_ERROR)
+      .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+  }
+};
+
 // 마이페이지 개별 활동 삭제 - 창체
 const deleteCreativeActivity = async (req: Request, res: Response) => {
   const { activityId } = req.params;
@@ -252,6 +390,10 @@ const mypageController = {
   getSubjectActivity,
   getBookActivity,
   getPrizeActivity,
+  updateCreativeActivity,
+  updateSubjectActivity,
+  updateBookActivity,
+  updatePrizeActivity,
   deleteCreativeActivity,
   deleteSubjectActivity,
   deleteBookActivity,
