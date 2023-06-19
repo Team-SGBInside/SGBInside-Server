@@ -75,12 +75,12 @@ const createPrizeActivity = async (req: Request, res: Response) => {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
   const prizeActivityCreateDTO: PrizeActivityCreateDTO = req.body;
-  const writerId: number = parseInt(req.body.writerId);
-  console.log(writerId, typeof writerId);
+  // const writerId: number = parseInt(req.body.writerId);
+  // console.log(writerId, typeof writerId);
   //const userId = req.user.userId;
-  if (!writerId) {
-    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
-  }
+  // if (!writerId) {
+  //  return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  // }
 
   // const image: Express.MulterS3.File = req.file as Express.MulterS3.File;
   // const { location } = image;
@@ -91,9 +91,9 @@ const createPrizeActivity = async (req: Request, res: Response) => {
 
   try {
     const data = await activityService.createPrizeActivity(
-      prizeActivityCreateDTO,
+      prizeActivityCreateDTO
       //location,
-      writerId
+      //writerId
     );
 
     return res
