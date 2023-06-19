@@ -39,7 +39,10 @@ export default {
   CREATE_BOOK_ACTIVITY_SUCCESS: "독서활동 기록 성공",
 
   // 마이페이지
-  GET_ACCOUNT_INFO_SUCCESS: "마이페이지 계정 정보 조회 성공",
+  GET_MYPAGE_SUCCESS: "마이페이지 계정 정보 및 전체 활동 조회 성공",
+  GET_SINGLE_ACTIVITY_SUCCESS: "개별 활동 조회 성공",
+  UPDATE_SINGLE_ACTIVITY_SUCCESS: "개별 활동 수정 성공",
+  DELETE_SINGLE_ACTIVITY_SUCCESS: "개별 활동 삭제 성공",
 
   // 이미지
   NO_IMAGE: "이미지가 없습니다.",

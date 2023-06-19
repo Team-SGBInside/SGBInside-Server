@@ -47,7 +47,6 @@ router.post(
   "/book",
   [
     body("titleAuthor").trim().notEmpty(),
-    body("startDate").trim().notEmpty(),
     body("endDate").trim().notEmpty(),
     body("semester").trim().notEmpty(),
     body("thoughts").trim().notEmpty(),
