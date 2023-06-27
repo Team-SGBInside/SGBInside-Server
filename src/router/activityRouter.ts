@@ -33,6 +33,7 @@ router.post(
 
 router.post(
   "/prize",
+  upload.single("file"),
   [
     body("name").trim().notEmpty(),
     body("date").trim().notEmpty(),
