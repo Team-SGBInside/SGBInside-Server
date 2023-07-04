@@ -3,15 +3,15 @@ import { PrismaClient } from "@prisma/client";
 import { UserCreateDTO } from "../interfaces/user/UserCreateDTO";
 import bcrypt from "bcryptjs";
 import { sc } from "../constants";
+import { Request, Response } from "express";
 
 const prisma = new PrismaClient();
 
 // 유저 생성
-const createUser = async (userCreateDTO: UserCreateDTO) => {
+const createUser = async (userCreateDTO: UserCreateDTO, isTeen: string) => {
   // 넘겨받은 password를 bcrypt의 도움을 받아 암호화
   const salt = await bcrypt.genSalt(10); // 매우 작은 임의의 랜덤 텍스트 salt
   const password = await bcrypt.hash(userCreateDTO.password, salt); // 위에서 랜덤을 생성한 salt를 이용해 암호화
-  const isTeen = Boolean(userCreateDTO?.isTeen);
   const data = await prisma.user.create({
     data: {
       loginId: userCreateDTO.loginId,
@@ -20,7 +20,7 @@ const createUser = async (userCreateDTO: UserCreateDTO) => {
       school: userCreateDTO.school,
       grade: userCreateDTO.grade,
       age: userCreateDTO.age,
-      isTeen,
+      isTeen: isTeen === "true" ? true : false,
     },
   });
 
