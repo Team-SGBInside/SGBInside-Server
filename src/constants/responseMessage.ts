@@ -38,6 +38,8 @@ export default {
   CREATE_PRIZE_ACTIVITY_SUCCESS: "수상경력 활동 기록 성공",
   CREATE_BOOK_ACTIVITY_SUCCESS: "독서활동 기록 성공",
 
+  // 추천
+  FIND_CREATIVE_ACTIVITY_SUCCESS: "학과별 창의적 체험활동 조회 성공",
   // 마이페이지
   GET_MYPAGE_SUCCESS: "마이페이지 계정 정보 및 전체 활동 조회 성공",
   GET_SINGLE_ACTIVITY_SUCCESS: "개별 활동 조회 성공",
