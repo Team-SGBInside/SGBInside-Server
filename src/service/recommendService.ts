@@ -94,9 +94,14 @@ const findPrizeActivity = async (contest: string) => {
   const allSearchContest = [];
   const allPrizeActivity = await prisma.prize_Activity.findMany();
   const searchContest = JSON.stringify(contest.split(""));
+
   console.log(typeof searchContest, searchContest);
   for (let i = 0; i < allPrizeActivity.length; i++) {
-    if (allPrizeActivity[i].name.includes(searchContest)) {
+    if (
+      allPrizeActivity[i].name
+        .split("")
+        .filter((x) => searchContest.includes(x))
+    ) {
       allSearchContest.push(allPrizeActivity[i]);
     }
   }
