@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import router from "./router";
 import app from "./app";
 
-const PORT = 3002;
+const PORT = 3000;
 
 app.use(express.json());
 

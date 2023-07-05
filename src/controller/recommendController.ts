@@ -19,6 +19,7 @@ const sortType = {
   VOLUNTEER: "volunteer",
 };
 
+// 학과별 창의적 체험활동 추천
 const findCreativeActivity = async (req: Request, res: Response) => {
   const major = req.query.major as string;
   const sort = req.query.sort as string;
@@ -54,6 +55,33 @@ const findCreativeActivity = async (req: Request, res: Response) => {
   }
 };
 
-const recommendController = { findCreativeActivity };
+// 대회별 준비팁 추천
+const findPrizeActivity = async (req: Request, res: Response) => {
+  const contest = req.body.contest;
+  if (!contest || contest === "") {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  }
+  try {
+    const data = await recommendService.findPrizeActivity(contest);
+    if (!data) {
+      return res
+        .status(sc.BAD_REQUEST)
+        .send(fail(sc.BAD_REQUEST, rm.FIND_PRIZE_ACTIVITY_FAIL));
+    }
+    return res
+      .status(sc.OK)
+      .send(success(sc.OK, rm.FIND_PRIZE_ACTIVITY_SUCCESS, data));
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(sc.INTERNAL_SERVER_ERROR)
+      .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+  }
+};
+
+const recommendController = {
+  findCreativeActivity,
+  findPrizeActivity,
+};
 
 export default recommendController;

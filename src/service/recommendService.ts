@@ -90,5 +90,18 @@ const findCreativeActivity = async (major: string, sort: string) => {
   return allMentorActivity[0];
 };
 
-const recommendService = { findCreativeActivity };
+const findPrizeActivity = async (contest: string) => {
+  const allSearchContest = [];
+  const allPrizeActivity = await prisma.prize_Activity.findMany();
+  const searchContest = JSON.stringify(contest.split(""));
+  console.log(typeof searchContest, searchContest);
+  for (let i = 0; i < allPrizeActivity.length; i++) {
+    if (allPrizeActivity[i].name.includes(searchContest)) {
+      allSearchContest.push(allPrizeActivity[i]);
+    }
+  }
+  return allSearchContest;
+};
+
+const recommendService = { findCreativeActivity, findPrizeActivity };
 export default recommendService;
