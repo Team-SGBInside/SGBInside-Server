@@ -23,7 +23,7 @@ const createUser = async (req: Request, res: Response) => {
   const isTeen = req.body.isTeen;
 
   try {
-    const data = await userService.createUser(userCreateDTO);
+    const data = await userService.createUser(userCreateDTO, isTeen);
 
     if (!data) {
       return res
