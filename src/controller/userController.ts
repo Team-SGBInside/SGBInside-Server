@@ -42,7 +42,14 @@ const createUser = async (req: Request, res: Response) => {
 
     const result = {
       userId: data.userId,
+      loginId: data.loginId,
+      password: data.password,
       name: data.name,
+      school: data.school,
+      grade: data.grade,
+      age: data.age,
+      isTeen: data.isTeen,
+      major: data.major,
       accessToken,
     };
 
