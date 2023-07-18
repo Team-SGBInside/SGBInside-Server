@@ -79,9 +79,33 @@ const findPrizeActivity = async (req: Request, res: Response) => {
   }
 };
 
+// 커리어넷 api - 관리 교과목 추천
+
+// 학과별 권장도서 추천
+const getBooksFromExcel = async (req: Request, res: Response) => {
+  const major = req.body.major;
+  try {
+    const data = await recommendService.getBooksFromExcel(major);
+    if (!data) {
+      return res
+        .status(sc.BAD_REQUEST)
+        .send(fail(sc.BAD_REQUEST, rm.GET_RECOMMEND_BOOKS_FAIL));
+    }
+    return res
+      .status(sc.OK)
+      .send(success(sc.OK, rm.GET_RECOMMEND_BOOKS_SUCCESS, data));
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(sc.INTERNAL_SERVER_ERROR)
+      .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+  }
+};
+
 const recommendController = {
   findCreativeActivity,
   findPrizeActivity,
+  getBooksFromExcel,
 };
 
 export default recommendController;
