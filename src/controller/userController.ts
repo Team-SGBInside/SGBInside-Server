@@ -6,6 +6,7 @@ import { rm, sc } from "../constants";
 import { fail, success } from "../constants/response";
 import jwtHandler from "../modules/jwtHandler";
 import { UserSignInDTO } from "../interfaces/user/UserSignInDTO";
+import axios from "axios";
 
 // 유저 생성
 const createUser = async (req: Request, res: Response) => {

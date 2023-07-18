@@ -1,4 +1,7 @@
 import { PrismaClient } from "@prisma/client";
+import ExcelJS from "exceljs";
+import fs from "fs";
+
 const prisma = new PrismaClient();
 
 // 학과별 창의적체험활동 전체 조회
@@ -108,5 +111,37 @@ const findPrizeActivity = async (contest: string) => {
   return allSearchContest;
 };
 
-const recommendService = { findCreativeActivity, findPrizeActivity };
+// 학과별 권장도서 조회
+const getBooksFromExcel = async (major: string) => {
+  // console.log("Current Directory Path:", __dirname);
+  // let path: any;
+  // path.join(__dirname, "../books/recommendBooks.xlsx");
+  //console.log(workbook);
+  const jsonFile = fs.readFileSync("src/books/recommendBooks.json", "utf8");
+
+  const jsonData = JSON.parse(jsonFile);
+
+  const recommendBooks: Array<object> = [];
+  for (let i = 0; i < jsonData.length; i++) {
+    const jsonDataMajor = jsonData[i]["관련전공"].split(",");
+    if (major.includes(jsonDataMajor) || jsonDataMajor.includes(major)) {
+      const searchQuery = jsonData[i]["도서명"];
+      console.log(searchQuery);
+      jsonData[
+        i
+      ].purchaseLink = `https://search.kyobobook.co.kr/search?keyword=${searchQuery}`;
+      recommendBooks.push(jsonData[i]);
+    }
+  }
+  recommendBooks[0] = {
+    searchKeyword: major,
+    totalBooksCount: recommendBooks.length,
+  };
+  return recommendBooks;
+};
+const recommendService = {
+  findCreativeActivity,
+  findPrizeActivity,
+  getBooksFromExcel,
+};
 export default recommendService;

@@ -42,6 +42,8 @@ export default {
   FIND_CREATIVE_ACTIVITY_SUCCESS: "학과별 창의적 체험활동 조회 성공",
   FIND_PRIZE_ACTIVITY_SUCCESS: "대회별 준비 팁 조회 성공",
   FIND_PRIZE_ACTIVITY_FAIL: "대회별 준비 팁 조회 실패",
+  GET_RECOMMEND_BOOKS_SUCCESS: "학과별 권장도서 조회 성공",
+  GET_RECOMMEND_BOOKS_FAIL: "학과별 권장도서 조회 실패",
 
   // 마이페이지
   GET_MYPAGE_SUCCESS: "마이페이지 계정 정보 및 전체 활동 조회 성공",
