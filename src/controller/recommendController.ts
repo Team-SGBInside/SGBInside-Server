@@ -21,16 +21,13 @@ const sortType = {
 
 // 학과별 창의적 체험활동 추천
 const findCreativeActivity = async (req: Request, res: Response) => {
-  const major = req.query.major as string;
+  const major = req.body.major;
   const sort = req.query.sort as string;
   if (!major || !sort) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
   if (
-    major !== majorType.COMP &&
-    major !== majorType.ENG &&
-    major !== majorType.KOR &&
     sort !== sortType.ALL &&
     sort !== sortType.SELF &&
     sort !== sortType.CAREER &&
