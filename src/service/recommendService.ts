@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, User } from "@prisma/client";
 import ExcelJS from "exceljs";
 import fs from "fs";
 
@@ -16,11 +16,20 @@ const findCreativeActivity = async (major: string, sort: string) => {
   const allMentorId: Array<number> = [];
 
   for (let i = 0; i < allMentor.length; i++) {
-    allMentorId.push(allMentor[i].userId);
+    // 작성한 창체활동이 있는 경우에만 조회하고자 하는 id에 추가
+    const mentorActivity = await prisma.creative_Activity.findMany({
+      where: {
+        writerId: allMentor[i].userId,
+      },
+    });
+    if (mentorActivity.length >= 1) {
+      allMentorId.push(allMentor[i].userId);
+    }
   }
+  console.log("allMentorId: ", allMentorId);
 
   // 학과 멘토들의 창의적 체험 활동 전체 조회
-  const allMentorActivity: Array<object> = [];
+  const allMentorActivity: Array<object> | any = [];
 
   if (sort === "all") {
     for (let i = 0; i < allMentorId.length; i++) {
@@ -31,7 +40,27 @@ const findCreativeActivity = async (major: string, sort: string) => {
           },
         })
       );
+      console.log(allMentorActivity);
+
+      const writer = await prisma.user.findUnique({
+        where: {
+          userId: allMentorId[i],
+        },
+      });
+
+      const writerName = writer?.name;
+      const writerMajor: string | null | undefined | any = writer?.major;
+      const writerSchoolMajor = writer?.school.concat(" ".concat(writerMajor));
+      const writerGrade = writer?.grade;
+      console.log(allMentorActivity[0].length);
+      for (let i = 0; i < allMentorActivity[0].length; i++) {
+        allMentorActivity[0][i].writerName = writer?.name;
+        allMentorActivity[0][i].writerSchoolMajor = writerSchoolMajor;
+        allMentorActivity[0][i].writerGrade = writerGrade;
+      }
     }
+    console.log("final allMentorActivity: ", allMentorActivity);
+    return allMentorActivity;
   }
 
   // 학과 멘토들의 창의적 체험활동 유형별 조회
@@ -47,8 +76,26 @@ const findCreativeActivity = async (major: string, sort: string) => {
               },
             })
           );
-          return allMentorActivity[0];
+          const writer = await prisma.user.findUnique({
+            where: {
+              userId: allMentorId[i],
+            },
+          });
+
+          const writerName = writer?.name;
+          const writerMajor: string | null | undefined | any = writer?.major;
+          const writerSchoolMajor = writer?.school.concat(
+            " ".concat(writerMajor)
+          );
+          const writerGrade = writer?.grade;
+          console.log(allMentorActivity[0].length);
+          for (let i = 0; i < allMentorActivity[0].length; i++) {
+            allMentorActivity[0][i].writerName = writer?.name;
+            allMentorActivity[0][i].writerSchoolMajor = writerSchoolMajor;
+            allMentorActivity[0][i].writerGrade = writerGrade;
+          }
         }
+        return allMentorActivity;
 
       case "career":
         for (let i = 0; i < allMentorId.length; i++) {
@@ -60,8 +107,27 @@ const findCreativeActivity = async (major: string, sort: string) => {
               },
             })
           );
-          return allMentorActivity[0];
+          const writer = await prisma.user.findUnique({
+            where: {
+              userId: allMentorId[i],
+            },
+          });
+
+          const writerName = writer?.name;
+          const writerMajor: string | null | undefined | any = writer?.major;
+          const writerSchoolMajor = writer?.school.concat(
+            " ".concat(writerMajor)
+          );
+          const writerGrade = writer?.grade;
+          console.log(allMentorActivity[0].length);
+          for (let i = 0; i < allMentorActivity[0].length; i++) {
+            allMentorActivity[0][i].writerName = writer?.name;
+            allMentorActivity[0][i].writerSchoolMajor = writerSchoolMajor;
+            allMentorActivity[0][i].writerGrade = writerGrade;
+          }
         }
+        return allMentorActivity;
+
       case "club":
         for (let i = 0; i < allMentorId.length; i++) {
           allMentorActivity.push(
@@ -72,8 +138,26 @@ const findCreativeActivity = async (major: string, sort: string) => {
               },
             })
           );
-          return allMentorActivity[0];
+          const writer = await prisma.user.findUnique({
+            where: {
+              userId: allMentorId[i],
+            },
+          });
+
+          const writerName = writer?.name;
+          const writerMajor: string | null | undefined | any = writer?.major;
+          const writerSchoolMajor = writer?.school.concat(
+            " ".concat(writerMajor)
+          );
+          const writerGrade = writer?.grade;
+          console.log(allMentorActivity[0].length);
+          for (let i = 0; i < allMentorActivity[0].length; i++) {
+            allMentorActivity[0][i].writerName = writer?.name;
+            allMentorActivity[0][i].writerSchoolMajor = writerSchoolMajor;
+            allMentorActivity[0][i].writerGrade = writerGrade;
+          }
         }
+        return allMentorActivity;
 
       case "volunteer":
         for (let i = 0; i < allMentorId.length; i++) {
@@ -85,14 +169,31 @@ const findCreativeActivity = async (major: string, sort: string) => {
               },
             })
           );
-          return allMentorActivity[0];
+          const writer = await prisma.user.findUnique({
+            where: {
+              userId: allMentorId[i],
+            },
+          });
+
+          const writerName = writer?.name;
+          const writerMajor: string | null | undefined | any = writer?.major;
+          const writerSchoolMajor = writer?.school.concat(
+            " ".concat(writerMajor)
+          );
+          const writerGrade = writer?.grade;
+          console.log(allMentorActivity[0].length);
+          for (let i = 0; i < allMentorActivity[0].length; i++) {
+            allMentorActivity[0][i].writerName = writer?.name;
+            allMentorActivity[0][i].writerSchoolMajor = writerSchoolMajor;
+            allMentorActivity[0][i].writerGrade = writerGrade;
+          }
         }
+        return allMentorActivity;
     }
   }
-
-  return allMentorActivity[0];
 };
 
+// 대회별 준비팁 추천
 const findPrizeActivity = async (contest: string) => {
   const allSearchContest = [];
   const allPrizeActivity = await prisma.prize_Activity.findMany();
@@ -101,13 +202,20 @@ const findPrizeActivity = async (contest: string) => {
   console.log(typeof searchContest, searchContest);
   for (let i = 0; i < allPrizeActivity.length; i++) {
     if (
-      allPrizeActivity[i].name
-        .split("")
-        .filter((x) => searchContest.includes(x))
+      allPrizeActivity[i].name.includes(contest)
+      // allPrizeActivity[i].name
+      //   .split("")
+      //   .filter((x) => searchContest.includes(x))
     ) {
+      console.log("here ", i);
       allSearchContest.push(allPrizeActivity[i]);
     }
   }
+  console.log(allSearchContest);
+  allSearchContest[0] = {
+    searchKeyword: contest,
+    totalTipCount: allSearchContest.length,
+  };
   return allSearchContest;
 };
 
