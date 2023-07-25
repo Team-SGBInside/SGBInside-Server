@@ -51,10 +51,12 @@ const findCreativeActivity = async (major: string, sort: string) => {
       const writerName = writer?.name;
       const writerMajor: string | null | undefined | any = writer?.major;
       const writerSchoolMajor = writer?.school.concat(" ".concat(writerMajor));
+      const writerGrade = writer?.grade;
       console.log(allMentorActivity[0].length);
       for (let i = 0; i < allMentorActivity[0].length; i++) {
         allMentorActivity[0][i].writerName = writer?.name;
         allMentorActivity[0][i].writerSchoolMajor = writerSchoolMajor;
+        allMentorActivity[0][i].writerGrade = writerGrade;
       }
     }
     console.log("final allMentorActivity: ", allMentorActivity);
@@ -74,8 +76,26 @@ const findCreativeActivity = async (major: string, sort: string) => {
               },
             })
           );
-          return allMentorActivity;
+          const writer = await prisma.user.findUnique({
+            where: {
+              userId: allMentorId[i],
+            },
+          });
+
+          const writerName = writer?.name;
+          const writerMajor: string | null | undefined | any = writer?.major;
+          const writerSchoolMajor = writer?.school.concat(
+            " ".concat(writerMajor)
+          );
+          const writerGrade = writer?.grade;
+          console.log(allMentorActivity[0].length);
+          for (let i = 0; i < allMentorActivity[0].length; i++) {
+            allMentorActivity[0][i].writerName = writer?.name;
+            allMentorActivity[0][i].writerSchoolMajor = writerSchoolMajor;
+            allMentorActivity[0][i].writerGrade = writerGrade;
+          }
         }
+        return allMentorActivity;
 
       case "career":
         for (let i = 0; i < allMentorId.length; i++) {
@@ -87,8 +107,27 @@ const findCreativeActivity = async (major: string, sort: string) => {
               },
             })
           );
-          return allMentorActivity;
+          const writer = await prisma.user.findUnique({
+            where: {
+              userId: allMentorId[i],
+            },
+          });
+
+          const writerName = writer?.name;
+          const writerMajor: string | null | undefined | any = writer?.major;
+          const writerSchoolMajor = writer?.school.concat(
+            " ".concat(writerMajor)
+          );
+          const writerGrade = writer?.grade;
+          console.log(allMentorActivity[0].length);
+          for (let i = 0; i < allMentorActivity[0].length; i++) {
+            allMentorActivity[0][i].writerName = writer?.name;
+            allMentorActivity[0][i].writerSchoolMajor = writerSchoolMajor;
+            allMentorActivity[0][i].writerGrade = writerGrade;
+          }
         }
+        return allMentorActivity;
+
       case "club":
         for (let i = 0; i < allMentorId.length; i++) {
           allMentorActivity.push(
@@ -99,8 +138,26 @@ const findCreativeActivity = async (major: string, sort: string) => {
               },
             })
           );
-          return allMentorActivity;
+          const writer = await prisma.user.findUnique({
+            where: {
+              userId: allMentorId[i],
+            },
+          });
+
+          const writerName = writer?.name;
+          const writerMajor: string | null | undefined | any = writer?.major;
+          const writerSchoolMajor = writer?.school.concat(
+            " ".concat(writerMajor)
+          );
+          const writerGrade = writer?.grade;
+          console.log(allMentorActivity[0].length);
+          for (let i = 0; i < allMentorActivity[0].length; i++) {
+            allMentorActivity[0][i].writerName = writer?.name;
+            allMentorActivity[0][i].writerSchoolMajor = writerSchoolMajor;
+            allMentorActivity[0][i].writerGrade = writerGrade;
+          }
         }
+        return allMentorActivity;
 
       case "volunteer":
         for (let i = 0; i < allMentorId.length; i++) {
@@ -112,8 +169,26 @@ const findCreativeActivity = async (major: string, sort: string) => {
               },
             })
           );
-          return allMentorActivity;
+          const writer = await prisma.user.findUnique({
+            where: {
+              userId: allMentorId[i],
+            },
+          });
+
+          const writerName = writer?.name;
+          const writerMajor: string | null | undefined | any = writer?.major;
+          const writerSchoolMajor = writer?.school.concat(
+            " ".concat(writerMajor)
+          );
+          const writerGrade = writer?.grade;
+          console.log(allMentorActivity[0].length);
+          for (let i = 0; i < allMentorActivity[0].length; i++) {
+            allMentorActivity[0][i].writerName = writer?.name;
+            allMentorActivity[0][i].writerSchoolMajor = writerSchoolMajor;
+            allMentorActivity[0][i].writerGrade = writerGrade;
+          }
         }
+        return allMentorActivity;
     }
   }
 };
