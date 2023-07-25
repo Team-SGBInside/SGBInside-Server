@@ -41,6 +41,11 @@ const findCreativeActivity = async (req: Request, res: Response) => {
 
   try {
     const data = await recommendService.findCreativeActivity(major, sort);
+    if (!data) {
+      return res
+        .status(sc.BAD_REQUEST)
+        .send(fail(sc.BAD_REQUEST, rm.FIND_CREATIVE_ACTIVITY_FAIL));
+    }
     return res
       .status(sc.OK)
       .send(success(sc.OK, rm.FIND_CREATIVE_ACTIVITY_SUCCESS, data));
