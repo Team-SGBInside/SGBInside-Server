@@ -105,10 +105,29 @@ const findPrizeActivity = async (req: Request, res: Response) => {
   }
 };
 
-// // 대회별 준비팁 추천 개별 조회
-// const findPrizeActivityById = async(req: Request, res: Response) => {
-//   const
-// }
+// 대회별 준비팁 추천 개별 조회
+const findPrizeActivityById = async (req: Request, res: Response) => {
+  const activityId = req.params.activityId;
+  if (!activityId) {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  }
+  try {
+    const data = await recommendService.findPrizeActivityById(+activityId);
+    if (!data) {
+      return res
+        .status(sc.BAD_REQUEST)
+        .send(fail(sc.BAD_REQUEST, rm.FIND_SINGLE_PRIZE_ACTIVITY_FAIL));
+    }
+    return res
+      .status(sc.OK)
+      .send(success(sc.OK, rm.FIND_SINGLE_PRIZE_ACTIVITY_SUCCESS, data));
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(sc.INTERNAL_SERVER_ERROR)
+      .send(fail(sc.INTERNAL_SERVER_ERROR, rm.INTERNAL_SERVER_ERROR));
+  }
+};
 
 // 커리어넷 api - 관리 교과목 추천
 
@@ -137,7 +156,7 @@ const recommendController = {
   findCreativeActivity,
   findCreativeActivityById,
   findPrizeActivity,
-  // findPrizeActivityById,
+  findPrizeActivityById,
   getBooksFromExcel,
 };
 

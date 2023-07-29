@@ -229,6 +229,16 @@ const findPrizeActivity = async (contest: string) => {
   return allSearchContest;
 };
 
+// 대회별 준비팁 개별 조회
+const findPrizeActivityById = async (activityId: number) => {
+  const data = await prisma.prize_Activity.findUnique({
+    where: {
+      activityId: activityId,
+    },
+  });
+  return data;
+};
+
 // 학과별 권장도서 조회
 const getBooksFromExcel = async (major: string) => {
   // console.log("Current Directory Path:", __dirname);
@@ -261,6 +271,7 @@ const recommendService = {
   findCreativeActivity,
   findCreativeActivityById,
   findPrizeActivity,
+  findPrizeActivityById,
   getBooksFromExcel,
 };
 export default recommendService;

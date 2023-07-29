@@ -46,6 +46,8 @@ export default {
   FIND_SINGLE_CREATIVE_ACTIVITY_FAIL: "학과별 창의적 체험활동 개별 조회 실패",
   FIND_PRIZE_ACTIVITY_SUCCESS: "대회별 준비 팁 조회 성공",
   FIND_PRIZE_ACTIVITY_FAIL: "대회별 준비 팁 조회 실패",
+  FIND_SINGLE_PRIZE_ACTIVITY_SUCCESS: "대회별 준비 팁 개별 조회 성공",
+  FIND_SINGLE_PRIZE_ACTIVITY_FAIL: "대회별 준비 팁 개별 조회 실패",
   GET_RECOMMEND_BOOKS_SUCCESS: "학과별 권장도서 조회 성공",
   GET_RECOMMEND_BOOKS_FAIL: "학과별 권장도서 조회 실패",
 
