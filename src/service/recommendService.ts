@@ -193,6 +193,16 @@ const findCreativeActivity = async (major: string, sort: string) => {
   }
 };
 
+// 학과별 창의적 체험활동 개별 조회
+const findCreativeActivityById = async (activityId: number) => {
+  const data = await prisma.creative_Activity.findUnique({
+    where: {
+      activityId: activityId,
+    },
+  });
+  return data;
+};
+
 // 대회별 준비팁 추천
 const findPrizeActivity = async (contest: string) => {
   const allSearchContest = [];
@@ -249,6 +259,7 @@ const getBooksFromExcel = async (major: string) => {
 };
 const recommendService = {
   findCreativeActivity,
+  findCreativeActivityById,
   findPrizeActivity,
   getBooksFromExcel,
 };
