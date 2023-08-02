@@ -171,17 +171,17 @@ const updateCreativeActivity = async (req: Request, res: Response) => {
   const creativeActivityCreateDTO: CreativeActivityCreateDTO = req.body;
 
   const { activityId } = req.params;
-  const writerId = req.body.writerId;
+  // const writerId = req.body.writerId;
 
   if (!activityId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
-  if (writerId != null) {
-    return res
-      .status(sc.BAD_REQUEST)
-      .send(fail(sc.BAD_REQUEST, rm.BAD_REQUEST));
-  }
+  // if (writerId != null) {
+  //   return res
+  //     .status(sc.BAD_REQUEST)
+  //     .send(fail(sc.BAD_REQUEST, rm.BAD_REQUEST));
+  // }
 
   try {
     const data = await mypageService.updateCreativeActivity(

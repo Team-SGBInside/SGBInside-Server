@@ -261,6 +261,7 @@ const updateCreativeActivity = async (
       thoughts: creativeActivityCreateDTO.thoughts,
     },
   });
+  console.log(creativeActivityCreateDTO.thoughts);
   return data;
 };
 
