@@ -5,9 +5,6 @@ import { body } from "express-validator";
 
 const router: Router = Router();
 
-// 마이페이지 전체 활동 조회
-router.get("/:writerId", mypageController.getMypage);
-
 // 마이페이지 계정정보 조회
 // router.get("/my", mypageController.getAccountInfo);
 
@@ -32,5 +29,8 @@ router.post(
   upload.single("file"),
   mypageController.updatePrizeActivity
 );
+
+// 마이페이지 계정정보 및 전체 활동 조회
+router.get("/", mypageController.getMypage);
 
 export default router;
