@@ -35,6 +35,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 
     //? 얻어낸 userId 를 Request Body 내 userId 필드에 담고, 다음 미들웨어로 넘김( next() )
     req.body.userId = userId;
+    console.log("request body userId: ", userId);
 
     const foundUser = await userService.getUserById(userId);
     if (!foundUser) {

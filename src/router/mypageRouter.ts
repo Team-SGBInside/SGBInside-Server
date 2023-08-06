@@ -31,6 +31,6 @@ router.post(
 );
 
 // 마이페이지 계정정보 및 전체 활동 조회
-router.post("/", mypageController.getMypage);
+router.get("/", auth, mypageController.getMypage);
 
 export default router;

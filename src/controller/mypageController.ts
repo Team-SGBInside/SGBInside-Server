@@ -28,7 +28,8 @@ const semesterType = {
 
 // 마이페이지 전체 조회
 const getMypage = async (req: Request, res: Response) => {
-  const writerId = req.body.writerId;
+  // const writerId = req.body.writerId;
+  const writerId = req.user.id;
   const sort = req.query.sort as string;
   const semester = req.query.semester as string;
 
