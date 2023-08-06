@@ -29,9 +29,22 @@ const semesterType = {
 // 마이페이지 전체 조회
 const getMypage = async (req: Request, res: Response) => {
   // const writerId = req.body.writerId;
-  const writerId = req.user.id;
+  const writerId = req.user.userId;
   const sort = req.query.sort as string;
   const semester = req.query.semester as string;
+
+  if (!writerId) {
+    console.log(typeof writerId, writerId);
+    console.log("no writerId");
+  }
+
+  if (!sort) {
+    console.log("no writerId");
+  }
+
+  if (!semester) {
+    console.log("no writerId");
+  }
 
   if (!writerId || !sort || !semester) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
