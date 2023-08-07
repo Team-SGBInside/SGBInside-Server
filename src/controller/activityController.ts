@@ -15,14 +15,14 @@ const createCreativeActivity = async (req: Request, res: Response) => {
   }
 
   const creativeActivityCreateDTO: CreativeActivityCreateDTO = req.body;
-  const writerId = req.body.writerId;
-  // const userId = req.user.userId;
+  const writerId = req.user.userId;
   if (!writerId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
   try {
     const data = await activityService.createCreativeActivity(
+      writerId,
       creativeActivityCreateDTO
     );
 
@@ -43,18 +43,16 @@ const createSubjectDetailedActivity = async (req: Request, res: Response) => {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
-  // if (!userId) {
-  //   return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
-  // }
   const subjectDetailedActivityCreateDTO: SubjectDetailedActivityCreateDTO =
     req.body;
-  const writerId = req.body.writerId;
+  const writerId = req.user.userId;
   if (!writerId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
   try {
     const data = await activityService.createSubjectDetailedActivity(
+      writerId,
       subjectDetailedActivityCreateDTO
     );
 
@@ -75,9 +73,9 @@ const createPrizeActivity = async (req: Request, res: Response) => {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
   const prizeActivityCreateDTO: PrizeActivityCreateDTO = req.body;
-  const writerId: number = parseInt(req.body.writerId);
-  console.log(writerId, typeof writerId);
-  //const userId = req.user.userId;
+  // const writerId: number = parseInt(req.body.writerId);
+  // console.log(writerId, typeof writerId);
+  const writerId = req.user.userId;
   if (!writerId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
@@ -113,7 +111,7 @@ const createBookActivity = async (req: Request, res: Response) => {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
   const bookActivityCreateDTO: BookActivityCreateDTO = req.body;
-  const writerId = req.body.writerId;
+  const writerId = req.user.userId;
   if (!writerId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
@@ -126,6 +124,7 @@ const createBookActivity = async (req: Request, res: Response) => {
 
   try {
     const data = await activityService.createBookActivity(
+      writerId,
       bookActivityCreateDTO
     );
     return res

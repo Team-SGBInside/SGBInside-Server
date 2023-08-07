@@ -7,6 +7,7 @@ const router: Router = Router();
 
 router.post(
   "/creative",
+  auth,
   [
     body("name").trim().notEmpty(),
     body("activityType").trim().notEmpty(),
@@ -19,6 +20,7 @@ router.post(
 );
 router.post(
   "/subject",
+  auth,
   [
     body("subjectName").trim().notEmpty(),
     body("subjectContent").trim().notEmpty(),
@@ -33,6 +35,7 @@ router.post(
 
 router.post(
   "/prize",
+  auth,
   upload.single("file"),
   [
     body("name").trim().notEmpty(),
@@ -45,6 +48,7 @@ router.post(
 
 router.post(
   "/book",
+  auth,
   [
     body("titleAuthor").trim().notEmpty(),
     body("endDate").trim().notEmpty(),

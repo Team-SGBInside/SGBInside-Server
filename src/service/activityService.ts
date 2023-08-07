@@ -7,6 +7,7 @@ const prisma = new PrismaClient();
 
 // 창의적 체험활동 기록
 const createCreativeActivity = async (
+  writerId: number,
   creativeActivityCreateDTO: CreativeActivityCreateDTO
 ) => {
   const data = await prisma.creative_Activity.create({
@@ -18,7 +19,7 @@ const createCreativeActivity = async (
       semester: creativeActivityCreateDTO.semester,
       role: creativeActivityCreateDTO.role,
       thoughts: creativeActivityCreateDTO.thoughts,
-      writerId: creativeActivityCreateDTO.writerId,
+      writerId: writerId,
     },
   });
   // const activityId = data.activityId;
@@ -27,6 +28,7 @@ const createCreativeActivity = async (
 
 // 과목별 세부능력 특기사항 활동 기록
 const createSubjectDetailedActivity = async (
+  writerId: number,
   subjectDetailedActivityCreateDTO: SubjectDetailedActivityCreateDTO
 ) => {
   const data = await prisma.subject_Detailed_Ability_Activity.create({
@@ -40,7 +42,7 @@ const createSubjectDetailedActivity = async (
       activityContentDetail:
         subjectDetailedActivityCreateDTO.activityContentDetail,
       subjectFurtherStudy: subjectDetailedActivityCreateDTO.subjectFurtherStudy,
-      writerId: subjectDetailedActivityCreateDTO.writerId,
+      writerId: writerId,
     },
   });
   // const activityId = data.activityId;
@@ -73,6 +75,7 @@ const createPrizeActivity = async (
 
 // 독서활동 기록
 const createBookActivity = async (
+  writerId: number,
   bookActivityCreateDTO: BookActivityCreateDTO
 ) => {
   const data = await prisma.book_Activity.create({
@@ -87,7 +90,7 @@ const createBookActivity = async (
       quote3: bookActivityCreateDTO.quote3,
       quote4: bookActivityCreateDTO.quote4,
       quote5: bookActivityCreateDTO.quote5,
-      writerId: bookActivityCreateDTO.writerId,
+      writerId: writerId,
     },
   });
   // const activityId = data.activityId;
