@@ -71,11 +71,11 @@ model Book_Activity {
   semester       String? @db.VarChar(10)
   thoughts       String? @db.VarChar(300)
   relatedSubject String  @db.VarChar(20)
-  quote1         String? @db.VarChar(100)
-  quote2         String? @db.VarChar(100)
-  quote3         String? @db.VarChar(100)
-  quote4         String? @db.VarChar(100)
-  quote5         String? @db.VarChar(100)
+  quote1         String? @db.VarChar(500)
+  quote2         String? @db.VarChar(500)
+  quote3         String? @db.VarChar(500)
+  quote4         String? @db.VarChar(500)
+  quote5         String? @db.VarChar(500)
   writerId       Int
   User           User    @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
 }
