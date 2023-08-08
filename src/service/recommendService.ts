@@ -261,10 +261,10 @@ const getBooksFromExcel = async (major: string) => {
       recommendBooks.push(jsonData[i]);
     }
   }
-  recommendBooks[0] = {
-    searchKeyword: major,
-    totalBooksCount: recommendBooks.length,
-  };
+  // recommendBooks[0] = {
+  //   searchKeyword: major,
+  //   totalBooksCount: recommendBooks.length,
+  // };
   return recommendBooks;
 };
 const recommendService = {
