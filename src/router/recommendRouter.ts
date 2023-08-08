@@ -21,5 +21,5 @@ router.get("/prize/:activityId", recommendController.findPrizeActivityById);
 router.get("/prize", recommendController.findPrizeActivity);
 
 // 학과별 권장도서 추천 기능
-router.get("/book", recommendController.getBooksFromExcel);
+router.post("/book", recommendController.getBooksFromExcel);
 export default router;
