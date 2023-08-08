@@ -259,6 +259,7 @@ const getBooksFromExcel = async (major: string) => {
         i
       ].purchaseLink = `https://search.kyobobook.co.kr/search?keyword=${searchQuery}`;
       recommendBooks.push(jsonData[i]);
+      jsonData[i].id = recommendBooks.length;
     }
   }
   // recommendBooks[0] = {
