@@ -222,10 +222,6 @@ const findPrizeActivity = async (contest: string) => {
     }
   }
   console.log(allSearchContest);
-  allSearchContest[0] = {
-    searchKeyword: contest,
-    totalTipCount: allSearchContest.length,
-  };
   return allSearchContest;
 };
 
