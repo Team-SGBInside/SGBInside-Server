@@ -21,6 +21,7 @@ const sortType = {
 
 // 학과별 창의적 체험활동 추천
 const findCreativeActivity = async (req: Request, res: Response) => {
+  const userId = req.user.id;
   const major = req.body.major;
   const sort = req.query.sort as string;
   if (!major || !sort) {
