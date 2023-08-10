@@ -16,10 +16,10 @@ router.get(
 router.post("/creative", auth, recommendController.findCreativeActivity);
 
 // 대학생 수상경력 기록 바탕 추천 개별 조회 기능
-router.get("/prize/:activityId", recommendController.findPrizeActivityById);
+router.get("/prize/:activityId", auth, recommendController.findPrizeActivityById);
 
 // 대학생 수상경력 기록 바탕 추천 기능
-router.get("/prize", recommendController.findPrizeActivity);
+router.post("/prize", auth, recommendController.findPrizeActivity);
 
 // 학과별 권장도서 추천 기능
 router.post("/book", recommendController.getBooksFromExcel);

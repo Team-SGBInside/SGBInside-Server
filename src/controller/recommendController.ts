@@ -84,6 +84,7 @@ const findCreativeActivityById = async (req: Request, res: Response) => {
 
 // 대회별 준비팁 추천
 const findPrizeActivity = async (req: Request, res: Response) => {
+  const userId = req.user.userId;
   const contest = req.body.contest;
   if (!contest || contest === "") {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
@@ -108,6 +109,7 @@ const findPrizeActivity = async (req: Request, res: Response) => {
 
 // 대회별 준비팁 추천 개별 조회
 const findPrizeActivityById = async (req: Request, res: Response) => {
+  const userId = req.user.userId;
   const activityId = req.params.activityId;
   if (!activityId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
