@@ -243,15 +243,17 @@ const findPrizeActivity = async (contest: string) => {
   console.log("length: ", allPrizeActivity[0].length);
   const searchContest = contest.split(" ").join("");
   console.log(typeof searchContest, searchContest);
-  for (let i = 0; i < allPrizeActivity[0].length; i++) {
-    if (
-      allPrizeActivity[0][i].name.includes(searchContest)
-      // allPrizeActivity[i].name
-      //   .split("")
-      //   .filter((x) => searchContest.includes(x))
-    ) {
-      console.log("here ", i);
-      allSearchContest.push(allPrizeActivity[0][i]);
+  for (let i = 0; i < allPrizeActivity.length; i++) {
+    for (let j = 0; j < allPrizeActivity[i].length; j++) {
+      if (
+        allPrizeActivity[i][j].name.includes(searchContest)
+        // allPrizeActivity[i].name
+        //   .split("")
+        //   .filter((x) => searchContest.includes(x))
+      ) {
+        console.log("here ", i);
+        allSearchContest.push(allPrizeActivity[i][j]);
+      }
     }
   }
   console.log(allSearchContest);
