@@ -205,23 +205,73 @@ const findCreativeActivityById = async (activityId: number) => {
 
 // 대회별 준비팁 추천
 const findPrizeActivity = async (contest: string) => {
-  const allSearchContest = [];
-  const allPrizeActivity = await prisma.prize_Activity.findMany();
-  const searchContest = JSON.stringify(contest.split(""));
+  // 멘토들의 아이디 조회
+  const allMentor = await prisma.user.findMany({
+    where: {
+      isTeen: false,
+    },
+  });
+  const allMentorId: Array<number> = [];
 
+  // 검색한 대회에 관한 수상경력을 입력한 경우에만 조회하고자 하는 id에 추가
+  for (let i = 0; i < allMentor.length; i++) {
+    const mentorActivity = await prisma.prize_Activity.findMany({
+      where: {
+        writerId: allMentor[i].userId,
+      },
+    });
+    if (mentorActivity.length >= 1) {
+      allMentorId.push(allMentor[i].userId);
+    }
+  }
+
+  console.log("allMentorId: ", allMentorId);
+
+  // 검색한 대회에 관한 멘토들의 수상경력 전체 조회
+  const allSearchContest = [];
+  const allPrizeActivity: Array<object> | any = [];
+  for (let i = 0; i < allMentorId.length; i++) {
+    allPrizeActivity.push(
+      await prisma.prize_Activity.findMany({
+        where: {
+          writerId: allMentorId[i],
+        },
+      })
+    );
+  }
+  console.log(allPrizeActivity);
+  console.log("length: ", allPrizeActivity[0].length);
+  const searchContest = contest.split(" ").join("");
   console.log(typeof searchContest, searchContest);
-  for (let i = 0; i < allPrizeActivity.length; i++) {
+  for (let i = 0; i < allPrizeActivity[0].length; i++) {
     if (
-      allPrizeActivity[i].name.includes(contest)
+      allPrizeActivity[0][i].name.includes(searchContest)
       // allPrizeActivity[i].name
       //   .split("")
       //   .filter((x) => searchContest.includes(x))
     ) {
       console.log("here ", i);
-      allSearchContest.push(allPrizeActivity[i]);
+      allSearchContest.push(allPrizeActivity[0][i]);
     }
   }
   console.log(allSearchContest);
+
+  // 작성자 이름, 학교, 학과, 학년 추가
+  for (let i = 0; i < allSearchContest.length; i++) {
+    const writer = await prisma.user.findUnique({
+      where: {
+        userId: allSearchContest[i].writerId,
+      },
+    });
+
+    const writerName = writer?.name;
+    const writerMajor: string | null | undefined | any = writer?.major;
+    const writerSchoolMajor = writer?.school.concat(" ".concat(writerMajor));
+    const writerGrade = writer?.grade;
+    allSearchContest[i].writerName = writerName;
+    allSearchContest[i].writerSchoolMajor = writerSchoolMajor;
+    allSearchContest[i].writerGrade = writerGrade;
+  }
   return allSearchContest;
 };
 
