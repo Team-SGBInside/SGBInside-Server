@@ -63,7 +63,13 @@ const getTotalActivityByUserId = async (
               semester: semester,
             },
           });
-          return allcreativeActivity;
+          return {
+            activityCount: allcreativeActivity.length,
+            allcreativeActivity,
+            allSubjectDetailedActivity: [],
+            allPrizeActivity: [],
+            allBookActivity: [],
+          };
         }
 
         if (semester == "all") {
@@ -72,7 +78,13 @@ const getTotalActivityByUserId = async (
               writerId: writerId,
             },
           });
-          return allcreativeActivity;
+          return {
+            activityCount: allcreativeActivity.length,
+            allcreativeActivity,
+            allSubjectDetailedActivity: [],
+            allPrizeActivity: [],
+            allBookActivity: [],
+          };
         }
 
       case "subject":
@@ -84,7 +96,13 @@ const getTotalActivityByUserId = async (
                 activitySemester: semester,
               },
             });
-          return allSubjectDetailedActivity;
+          return {
+            activityCount: allSubjectDetailedActivity.length,
+            allcreativeActivity: [],
+            allSubjectDetailedActivity,
+            allPrizeActivity: [],
+            allBookActivity: [],
+          };
         }
 
         if (semester == "all") {
@@ -95,7 +113,13 @@ const getTotalActivityByUserId = async (
               },
             });
 
-          return allSubjectDetailedActivity;
+          return {
+            activityCount: allSubjectDetailedActivity.length,
+            allcreativeActivity: [],
+            allSubjectDetailedActivity,
+            allPrizeActivity: [],
+            allBookActivity: [],
+          };
         }
 
       case "prize":
@@ -107,7 +131,13 @@ const getTotalActivityByUserId = async (
             },
           });
 
-          return allPrizeActivity;
+          return {
+            activityCount: allPrizeActivity.length,
+            allcreativeActivity: [],
+            allSubjectDetailedActivity: [],
+            allPrizeActivity,
+            allBookActivity: [],
+          };
         }
 
         if (semester == "all") {
@@ -117,7 +147,13 @@ const getTotalActivityByUserId = async (
             },
           });
 
-          return allPrizeActivity;
+          return {
+            activityCount: allPrizeActivity.length,
+            allcreativeActivity: [],
+            allSubjectDetailedActivity: [],
+            allPrizeActivity,
+            allBookActivity: [],
+          };
         }
 
       case "book":
@@ -129,7 +165,13 @@ const getTotalActivityByUserId = async (
             },
           });
 
-          return allBookActivity;
+          return {
+            activityCount: allBookActivity.length,
+            allcreativeActivity: [],
+            allSubjectDetailedActivity: [],
+            allPrizeActivity: [],
+            allBookActivity,
+          };
         }
 
         if (semester == "all") {
@@ -139,7 +181,13 @@ const getTotalActivityByUserId = async (
             },
           });
 
-          return allBookActivity;
+          return {
+            activityCount: allBookActivity.length,
+            allcreativeActivity: [],
+            allSubjectDetailedActivity: [],
+            allPrizeActivity: [],
+            allBookActivity,
+          };
         }
     }
   }
