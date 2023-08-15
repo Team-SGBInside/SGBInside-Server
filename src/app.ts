@@ -9,6 +9,7 @@ const originList = [
   "http://localhost:3003",
   "http://localhost:3004",
   "http://localhost:3005",
+  "http://3.37.128.207:3000",
 ];
 
 app.use(express.json()); // bodyParser가 express 최근 버전에서 deprecated되어서 다음과 같이 처리해줘야함
