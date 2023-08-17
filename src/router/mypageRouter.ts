@@ -9,23 +9,40 @@ const router: Router = Router();
 // router.get("/my", mypageController.getAccountInfo);
 
 // 마이페이지 개별 활동 조회
-router.get("/creative/:activityId", mypageController.getCreativeActivity);
-router.get("/subject/:activityId", mypageController.getSubjectActivity);
-router.get("/book/:activityId", mypageController.getBookActivity);
-router.get("/prize/:activityId", mypageController.getPrizeActivity);
+router.get("/creative/:activityId", auth, mypageController.getCreativeActivity);
+router.get("/subject/:activityId", auth, mypageController.getSubjectActivity);
+router.get("/book/:activityId", auth, mypageController.getBookActivity);
+router.get("/prize/:activityId", auth, mypageController.getPrizeActivity);
 
 // 마이페이지 개별 활동 삭제
-router.delete("/creative/:activityId", mypageController.deleteCreativeActivity);
-router.delete("/subject/:activityId", mypageController.deleteSubjectActivity);
-router.delete("/book/:activityId", mypageController.deleteBookActivity);
-router.delete("/prize/:activityId", mypageController.deletePrizeActivity);
+router.delete(
+  "/creative/:activityId",
+  auth,
+  mypageController.deleteCreativeActivity
+);
+router.delete(
+  "/subject/:activityId",
+  auth,
+  mypageController.deleteSubjectActivity
+);
+router.delete("/book/:activityId", auth, mypageController.deleteBookActivity);
+router.delete("/prize/:activityId", auth, mypageController.deletePrizeActivity);
 
 // 마이페이지 개별 활동 수정
-router.post("/creative/:activityId", mypageController.updateCreativeActivity);
-router.post("/subject/:activityId", mypageController.updateSubjectActivity);
-router.post("/book/:activityId", mypageController.updateBookActivity);
+router.post(
+  "/creative/:activityId",
+  auth,
+  mypageController.updateCreativeActivity
+);
+router.post(
+  "/subject/:activityId",
+  auth,
+  mypageController.updateSubjectActivity
+);
+router.post("/book/:activityId", auth, mypageController.updateBookActivity);
 router.post(
   "/prize/:activityId",
+  auth,
   upload.single("file"),
   mypageController.updatePrizeActivity
 );
