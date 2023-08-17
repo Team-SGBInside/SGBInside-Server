@@ -61,6 +61,14 @@ router.post(
   "/prize/:activityId",
   auth,
   upload.single("file"),
+  [
+    body("name").trim().notEmpty(),
+    body("prize").trim().notEmpty(),
+    body("date").trim().notEmpty(),
+    body("semester").trim().notEmpty(),
+    body("role").trim().notEmpty(),
+    body("thoughts").trim().notEmpty(),
+  ],
   mypageController.updatePrizeActivity
 );
 
