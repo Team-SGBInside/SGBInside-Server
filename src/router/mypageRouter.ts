@@ -45,6 +45,15 @@ router.post(
 router.post(
   "/subject/:activityId",
   auth,
+  [
+    body("subjectName").trim().notEmpty(),
+    body("subjectContent").trim().notEmpty(),
+    body("activitySemester").trim().notEmpty(),
+    body("startDate").trim().notEmpty(),
+    body("endDate").trim().notEmpty(),
+    body("mainActivity").trim().notEmpty(),
+    body("activityContentDetail").trim().notEmpty(),
+  ],
   mypageController.updateSubjectActivity
 );
 router.post("/book/:activityId", auth, mypageController.updateBookActivity);

@@ -219,6 +219,10 @@ const updateCreativeActivity = async (req: Request, res: Response) => {
 
 // 마이페이지 개별 활동 수정 - 세특
 const updateSubjectActivity = async (req: Request, res: Response) => {
+  const error = validationResult(req);
+  if (!error.isEmpty()) {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  }
   const subjectActivityCreateDTO: SubjectDetailedActivityCreateDTO = req.body;
   const writerId = req.body.writerId;
   const { activityId } = req.params;
@@ -251,6 +255,10 @@ const updateSubjectActivity = async (req: Request, res: Response) => {
 
 // 마이페이지 개별 활동 수정 - 독서
 const updateBookActivity = async (req: Request, res: Response) => {
+  const error = validationResult(req);
+  if (!error.isEmpty()) {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  }
   const bookActivityCreateDTO: BookActivityCreateDTO = req.body;
   const writerId = req.body.writerId;
   const { activityId } = req.params;
@@ -283,6 +291,10 @@ const updateBookActivity = async (req: Request, res: Response) => {
 
 // 마이페이지 개별 활동 수정 - 수상
 const updatePrizeActivity = async (req: Request, res: Response) => {
+  const error = validationResult(req);
+  if (!error.isEmpty()) {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  }
   const prizeActivityCreateDTO: PrizeActivityCreateDTO = req.body;
 
   const image: Express.MulterS3.File = req.file as Express.MulterS3.File;
