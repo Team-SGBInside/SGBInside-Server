@@ -32,6 +32,14 @@ router.delete("/prize/:activityId", auth, mypageController.deletePrizeActivity);
 router.post(
   "/creative/:activityId",
   auth,
+  [
+    body("name").trim().notEmpty(),
+    body("startDate").trim().notEmpty(),
+    body("endDate").trim().notEmpty(),
+    body("semester").trim().notEmpty(),
+    body("activityType").trim().notEmpty(),
+    body("role").trim().notEmpty(),
+  ],
   mypageController.updateCreativeActivity
 );
 router.post(

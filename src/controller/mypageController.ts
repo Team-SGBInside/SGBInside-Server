@@ -182,6 +182,10 @@ const getPrizeActivity = async (req: Request, res: Response) => {
 
 // 마이페이지 개별 활동 수정 - 창체
 const updateCreativeActivity = async (req: Request, res: Response) => {
+  const error = validationResult(req);
+  if (!error.isEmpty()) {
+    return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
+  }
   const creativeActivityCreateDTO: CreativeActivityCreateDTO = req.body;
 
   const { activityId } = req.params;
