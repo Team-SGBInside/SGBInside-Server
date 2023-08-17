@@ -42,6 +42,7 @@ router.post(
   ],
   mypageController.updateCreativeActivity
 );
+
 router.post(
   "/subject/:activityId",
   auth,
@@ -56,7 +57,7 @@ router.post(
   ],
   mypageController.updateSubjectActivity
 );
-router.post("/book/:activityId", auth, mypageController.updateBookActivity);
+
 router.post(
   "/prize/:activityId",
   auth,
@@ -70,6 +71,19 @@ router.post(
     body("thoughts").trim().notEmpty(),
   ],
   mypageController.updatePrizeActivity
+);
+
+router.post(
+  "/book/:activityId",
+  auth,
+  [
+    body("titleAuthor").trim().notEmpty(),
+    body("endDate").trim().notEmpty(),
+    body("semester").trim().notEmpty(),
+    body("thoughts").trim().notEmpty(),
+    body("relatedSubjects").trim().notEmpty(),
+  ],
+  mypageController.updateBookActivity
 );
 
 // 마이페이지 계정정보 및 전체 활동 조회
