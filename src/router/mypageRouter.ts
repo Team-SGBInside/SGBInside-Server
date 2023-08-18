@@ -80,7 +80,6 @@ router.post(
     body("endDate").trim().notEmpty(),
     body("semester").trim().notEmpty(),
     body("thoughts").trim().notEmpty(),
-    body("relatedSubjects").trim().notEmpty(),
   ],
   mypageController.updateBookActivity
 );

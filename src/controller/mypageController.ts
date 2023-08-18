@@ -260,17 +260,10 @@ const updateBookActivity = async (req: Request, res: Response) => {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
   const bookActivityCreateDTO: BookActivityCreateDTO = req.body;
-  const writerId = req.body.writerId;
   const { activityId } = req.params;
 
   if (!activityId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
-  }
-
-  if (writerId != null) {
-    return res
-      .status(sc.BAD_REQUEST)
-      .send(fail(sc.BAD_REQUEST, rm.BAD_REQUEST));
   }
 
   try {
@@ -306,12 +299,6 @@ const updatePrizeActivity = async (req: Request, res: Response) => {
   if (!activityId) {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
-
-  // if (writerId !== null) {
-  //   return res
-  //     .status(sc.BAD_REQUEST)
-  //     .send(fail(sc.BAD_REQUEST, rm.BAD_REQUEST));
-  // }
 
   try {
     const data = await mypageService.updatePrizeActivity(
