@@ -18,6 +18,7 @@ const createUser = async (userCreateDTO: UserCreateDTO, isTeen: string) => {
       password,
       name: userCreateDTO.name,
       school: userCreateDTO.school,
+      major: userCreateDTO.major,
       grade: userCreateDTO.grade,
       age: userCreateDTO.age,
       isTeen: isTeen === "true" ? true : false,

@@ -14,6 +14,7 @@ router.post(
     body("name").trim().notEmpty(),
     body("school").trim().notEmpty(),
     body("grade").trim().notEmpty(),
+    body("age").trim().notEmpty(),
     body("isTeen").trim().notEmpty(),
   ],
   userController.createUser

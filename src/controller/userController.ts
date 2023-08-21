@@ -32,12 +32,6 @@ const createUser = async (req: Request, res: Response) => {
         .send(fail(sc.BAD_REQUEST, rm.SIGNUP_FAIL));
     }
 
-    if (!grade || !age || !isTeen) {
-      return res
-        .status(sc.BAD_REQUEST)
-        .send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
-    }
-
     // jwtHandler 내 sign 함수를 이용해 accessToken 생성
     const accessToken = jwtHandler.sign(data.userId);
 

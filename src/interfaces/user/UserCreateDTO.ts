@@ -3,6 +3,7 @@ export interface UserCreateDTO {
   password: string;
   name: string;
   school: string;
+  major: string;
   grade: string;
   age: string;
 }
