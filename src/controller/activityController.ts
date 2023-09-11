@@ -80,15 +80,22 @@ const createPrizeActivity = async (req: Request, res: Response) => {
     return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
   }
 
-  const image: Express.MulterS3.File = req.file as Express.MulterS3.File;
-
-  const { location } = image;
-  console.log("image: ", image);
-  console.log("location: ", location);
-
-  // if (!userId) {
-  //   return res.status(sc.BAD_REQUEST).send(fail(sc.BAD_REQUEST, rm.NULL_VALUE));
-  // }
+  // var image: Express.MulterS3.File = req.file as Express.MulterS3.File;
+  let location: any;
+  if (!req.file) {
+    console.log("--- !image ---");
+    let image: any = {};
+    image.location =
+      "https://sgbinside-bucket.s3.ap-northeast-2.amazonaws.com/no-image.jpg";
+    location = image.location;
+    console.log("image: ", image);
+    console.log("location: ", location);
+  } else {
+    let image: Express.MulterS3.File = req.file as Express.MulterS3.File;
+    location = image.location;
+    console.log("image: ", image);
+    console.log("location: ", location);
+  }
 
   try {
     const data = await activityService.createPrizeActivity(
