@@ -300,7 +300,15 @@ const getBooksFromExcel = async (major: string) => {
   const recommendBooks: Array<object> = [];
   for (let i = 0; i < jsonData.length; i++) {
     const jsonDataMajor = jsonData[i]["관련전공"].split(",");
-    if (major.includes(jsonDataMajor) || jsonDataMajor.includes(major)) {
+    // console.log("major:", major);
+    // console.log("jsonDataMajor: ", jsonDataMajor);
+    if (
+      major.includes(jsonDataMajor) ||
+      jsonDataMajor.includes(major) ||
+      jsonDataMajor[0].includes(major)
+    ) {
+      console.log("jsonDataMajor that includes: ", jsonDataMajor);
+
       const searchQuery = jsonData[i]["도서명"];
       console.log(searchQuery);
       jsonData[
