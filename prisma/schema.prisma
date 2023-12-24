@@ -79,9 +79,3 @@ model Book_Activity {
   writerId       Int
   User           User    @relation(fields: [writerId], references: [userId], onDelete: Cascade, map: "writerId")
 }
-
-model Activity {
-  id         Int     @id @unique(map: "Activity_activityId_key") @default(autoincrement())
-  semester   String? @db.VarChar(10)
-  activityId Int?
-}
