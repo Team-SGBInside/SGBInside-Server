@@ -102,8 +102,8 @@
 
 ## 📑 요구사항 명세서
 명세서 내용이 길어 노션 참고를 부탁드리겠습니다. <br>
-[요구사항 명세서 Link](https://brick-rainbow-789.notion.site/37517f5606534ca6aa8637abc890329f
-)
+[요구사항 명세서 Link](https://brick-rainbow-789.notion.site/37517f5606534ca6aa8637abc890329f) 
+<br>
 <br>
 
 ## 📜 API 명세서
@@ -250,7 +250,6 @@ Language & Framework<br>
 Database<br>
 <img alt="PostgreSQL" src ="https://img.shields.io/badge/postgresql-4479A1.svg?&style=for-the-badge&logo=postgresql&logoColor=white"/>
 <img alt="prisma" src ="https://img.shields.io/badge/prisma-1A3173.svg?&style=for-the-badge&logo=prisma&logoColor=white"/>
-<img alt="DataGrip" src ="https://img.shields.io/badge/datagrip-5FD54F.svg?&style=for-the-badge&logo=datagrip&logoColor=white"/>
 
 배포 환경<br>
 <img alt="Amazon EC2" src ="https://img.shields.io/badge/Amazon EC2-FF9900.svg?&style=for-the-badge&logo=amazonec2&logoColor=white"/>
@@ -259,11 +258,11 @@ Database<br>
 <img alt="Nodemon" src="https://img.shields.io/badge/Nodemon-76D04B?style=for-the-badge&logo=Nodemon&logoColor=white">
 
 ETC<br>
-<img alt="Mocha" src="https://img.shields.io/badge/mocha-8D6748.svg?style=for-the-badge&logo=Mocha&logoColor=white"> 
 <img alt="JsonWebTokens" src="https://img.shields.io/badge/JSONWebTokens-000000.svg?style=for-the-badge&logo=JSONWebTokens&logoColor=white">
 
 IDE<br>
 <img alt="VSCode" src ="https://img.shields.io/badge/Vscode-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white"/>
+<img alt="DataGrip" src ="https://img.shields.io/badge/datagrip-5FD54F.svg?&style=for-the-badge&logo=datagrip&logoColor=white"/>
 
 FE와의 협업 툴<br>
 <img alt="Github" src ="https://img.shields.io/badge/github-181717.svg?&style=for-the-badge&logo=github&logoColor=white"/>
