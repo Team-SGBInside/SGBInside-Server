@@ -260,7 +260,7 @@ Database<br>
 ETC<br>
 <img alt="JsonWebTokens" src="https://img.shields.io/badge/JSONWebTokens-000000.svg?style=for-the-badge&logo=JSONWebTokens&logoColor=white">
 
-IDE<br>
+VCS<br>
 <img alt="VSCode" src ="https://img.shields.io/badge/Vscode-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white"/>
 <img alt="DataGrip" src ="https://img.shields.io/badge/datagrip-5FD54F.svg?&style=for-the-badge&logo=datagrip&logoColor=white"/>
 
